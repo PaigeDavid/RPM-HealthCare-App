@@ -67,6 +67,10 @@ public class RPM_enterRulesControllerTest {
         controller.showPopup();
     }
     
+    @isTest static void testGoToHome() {
+        controller.gotoHome();
+    }
+    
     @isTest static void testClearFields() {
         controller.newFieldDetail = 'Payor Details';
         controller.newFieldName = 'test1';

@@ -73,6 +73,10 @@ public class RPM_exportRulesControllerTest {
         controller.gotoAdminToolkit();
     }
     
+    @isTest static void testGoToHome() {
+        controller.gotoHome();
+    }
+    
     @isTest(SeeAllData=true) static void testViewData() {
         RuleFull__c newRule = new RuleFull__c();
         newRule.Name = 'TestRule';
@@ -157,5 +161,13 @@ public class RPM_exportRulesControllerTest {
         controller.searchCriteria = 'a';
         controller.selectedField = 'Name_Of_Payor__c';
         System.assertEquals(null, controller.searchRules());
+    }
+    
+    @isTest static void testClearSearch() {
+        System.assertEquals(null, controller.clearSearch());
+    }
+    
+    @isTest static void testGetFieldNames() {
+        controller.getFieldNames();
     }
 }

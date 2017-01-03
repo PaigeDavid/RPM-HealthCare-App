@@ -6,7 +6,7 @@
         </div>
         
         <!--Breadcrumb trail-->
-        <apex:commandLink style="padding:10px;color:blue;" value="Home">
+        <apex:commandLink style="padding:10px;color:blue;" value="Home" action="{!gotoHome}">
         </apex:commandLink>
         <apex:outputText value="> Admin Toolkit">
         </apex:outputText>

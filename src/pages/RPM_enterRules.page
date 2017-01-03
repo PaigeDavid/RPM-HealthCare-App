@@ -17,7 +17,7 @@
         
         <!--Breadcrumb trail-->
         <apex:outputPanel styleClass="breadcrumb_panel">
-            <apex:commandLink style="padding-right:10px;color:blue;" value="Home"/>
+            <apex:commandLink style="padding-right:10px;color:blue;" value="Home" action="{!gotoHome}"/>
             <apex:outputText value=">"/>
             <apex:commandLink style="padding:10px;color:blue;" value="Admin Toolkit" action="{!gotoAdminToolkit}">
             </apex:commandLink>

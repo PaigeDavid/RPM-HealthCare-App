@@ -426,4 +426,10 @@ public class RPM_exportrulesController {
        return pr;
     }  
     
+    public PageReference gotoHome() {
+        PageReference pr = new pagereference('https://ap1.salesforce.com/home/home.jsp');
+        pr.setRedirect(true);
+        return pr;
+    }
+    
 }

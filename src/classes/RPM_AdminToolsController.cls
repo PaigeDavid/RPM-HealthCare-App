@@ -2,6 +2,12 @@ public class RPM_AdminToolsController {
     
     public RPM_AdminToolsController() {}
     
+    public PageReference gotoHome() {
+        PageReference pr = new pagereference('https://ap1.salesforce.com/home/home.jsp');
+        pr.setRedirect(true);
+        return pr;
+    }
+    
     public PageReference gotoImport()
     {
        PageReference pr = Page.RPM_enterRules;

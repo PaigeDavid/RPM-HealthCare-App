@@ -130,13 +130,6 @@ public class RPM_enterRulesController {
         else if(newFieldDetail.equals('Pharmacy'))
             pharmacy.remove(pharmacy.size()-1);
     }
-
-	public PageReference gotoAdminToolkit()
-    {
-       PageReference pr = Page.RPM_AdminTools;
-       pr.setRedirect(true);
-       return pr;
-    }
     
     public void clearFields() {
         myDate = null;
@@ -384,7 +377,16 @@ public class RPM_enterRulesController {
         }
     }
     
+    public PageReference gotoAdminToolkit()
+    {
+       PageReference pr = Page.RPM_AdminTools;
+       pr.setRedirect(true);
+       return pr;
+    }
     
-    
-    
+    public PageReference gotoHome() {
+        PageReference pr = new pagereference('https://ap1.salesforce.com/home/home.jsp');
+        pr.setRedirect(true);
+        return pr;
+    }
 }
