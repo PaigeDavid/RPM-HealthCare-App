@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Rule</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Rules</value>
+    </caseValues>
+    <fields>
+        <label><!-- APP Reimbursement --></label>
+        <name>APP_Reimbursement__c</name>
+    </fields>
+    <fields>
+        <help><!-- Advanced Practice Providers (Nurse Practitioner/Physician Assistant) May Bill Payer Without Supervising Physician On Site --></help>
+        <label><!-- Advanced Practice Providers --></label>
+        <name>Advanced_Practice_Providers__c</name>
+    </fields>
+    <fields>
+        <label><!-- Claim Appeal Filing Limit --></label>
+        <name>Claim_Appeal_Filing_Limit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Claim Deadlines New Field 1 --></label>
+        <name>Claim_Deadlines_New_Field_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Claim Deadlines New Field 2 --></label>
+        <name>Claim_Deadlines_New_Field_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Claim Deadlines New Field 3 --></label>
+        <name>Claim_Deadlines_New_Field_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Claim Type --></label>
+        <name>Claim_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Comments --></label>
+        <name>Comments__c</name>
+    </fields>
+    <fields>
+        <label><!-- DRUGS --></label>
+        <name>DRUGS__c</name>
+    </fields>
+    <fields>
+        <label><!-- Effective Date --></label>
+        <name>Effective_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- FSC --></label>
+        <name>FSC__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fee Schedule New Field 1 --></label>
+        <name>Fee_Schedule_New_Field_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fee Schedule New Field 2 --></label>
+        <name>Fee_Schedule_New_Field_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fee Schedule New Field 3 --></label>
+        <name>Fee_Schedule_New_Field_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Flow Cytometry --></label>
+        <name>Flow_Cytometry__c</name>
+    </fields>
+    <fields>
+        <label><!-- In-House Pharmacy --></label>
+        <name>In_House_Pharmacy__c</name>
+    </fields>
+    <fields>
+        <label><!-- Initial Claim Filing Limit --></label>
+        <name>Initial_Claim_Filing_Limit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Insurance Class --></label>
+        <name>Insurance_Class__c</name>
+        <picklistValues>
+            <masterLabel>Commercial</masterLabel>
+            <translation><!-- Commercial --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Government</masterLabel>
+            <translation><!-- Government --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Insurance Company --></label>
+        <name>Insurance_Company__c</name>
+        <picklistValues>
+            <masterLabel>Blue Cross Blue Shield</masterLabel>
+            <translation><!-- Blue Cross Blue Shield --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medicare</masterLabel>
+            <translation><!-- Medicare --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Lab New Field 1 --></label>
+        <name>Lab_New_Field_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lab New Field 2 --></label>
+        <name>Lab_New_Field_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lab New Field 3 --></label>
+        <name>Lab_New_Field_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lab in Office --></label>
+        <name>Lab_in_Office__c</name>
+    </fields>
+    <fields>
+        <label><!-- MED ONC/UROL --></label>
+        <name>MED_ONC_UROL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Name Of Payor --></label>
+        <name>Name_Of_Payor__c</name>
+    </fields>
+    <fields>
+        <label><!-- Name of Reference Lab --></label>
+        <name>Name_of_Reference_Lab__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Basis New Field 1 --></label>
+        <name>Payment_Basis_New_Field_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Basis New Field 2 --></label>
+        <name>Payment_Basis_New_Field_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Basis New Field 3 --></label>
+        <name>Payment_Basis_New_Field_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment --></label>
+        <name>Payment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payor Details New Field 1 --></label>
+        <name>Payor_Details_New_Field_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payor Details New Field 2 --></label>
+        <name>Payor_Details_New_Field_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payor Details New Field 3 --></label>
+        <name>Payor_Details_New_Field_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payor Products --></label>
+        <name>Payor_Products__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pharmacy New Field 1 --></label>
+        <name>Pharmacy_New_Field_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pharmacy New Field 2 --></label>
+        <name>Pharmacy_New_Field_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pharmacy New Field 3 --></label>
+        <name>Pharmacy_New_Field_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- PlanType --></label>
+        <name>PlanType__c</name>
+    </fields>
+    <fields>
+        <label><!-- Plan Code --></label>
+        <name>Plan_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- PreAuth/PreApproval Diagnostics --></label>
+        <name>PreAuth_PreApproval_Diagnostics__c</name>
+    </fields>
+    <fields>
+        <label><!-- PreAuth/PreApproval Radiation --></label>
+        <name>PreAuth_PreApproval_Radiation__c</name>
+    </fields>
+    <fields>
+        <label><!-- Precertification/Authorization --></label>
+        <name>Precertification_Authorization__c</name>
+    </fields>
+    <fields>
+        <label><!-- Prior Authorizations New Field 1 --></label>
+        <name>Prior_Authorizations_New_Field_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Prior Authorizations New Field 2 --></label>
+        <name>Prior_Authorizations_New_Field_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Prior Authorizations New Field 3 --></label>
+        <name>Prior_Authorizations_New_Field_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- RAD ONC --></label>
+        <name>RAD_ONC__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referrals Needed --></label>
+        <name>Referrals_Needed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Required to Bill --></label>
+        <name>Required_to_Bill__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rule --></label>
+        <name>Rule__c</name>
+    </fields>
+    <fields>
+        <label><!-- Termination W/O Cause --></label>
+        <name>Termination_W_O_Cause__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

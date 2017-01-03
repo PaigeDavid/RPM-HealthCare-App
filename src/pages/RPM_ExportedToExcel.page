@@ -1,0 +1,102 @@
+<apex:page controller="RPM_ExportedToExcelController"  contentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet#{!fileName}.xls" >
+    <apex:pageBlock title="FLORIDA CANCER AFFILIATES - TAMPA BAY AND OCALA ">
+        <apex:pageBlockTable value="{!payorHeader}" var="head">
+            <apex:column rendered="{!payorDetail}" style="border-style: solid;border-width: thin;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!payorDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!payorDetail}" style="font-size:15pt;font-weight:bold;border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" value="{!payorHeader}" />
+            <apex:column rendered="{!payorDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!payorDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!payorDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!payorDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            
+            <apex:column rendered="{!claimDetail}" style="border-style: solid;border-width: thin;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!claimDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!claimDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!claimDetail}" style="font-size:15pt;font-weight:bold;border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" value="{!claimHeader}" />
+            <apex:column rendered="{!claimDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!claimDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            
+            <apex:column rendered="{!priorDetail}" style="border-style: solid;border-width: thin;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!priorDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!priorDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!priorDetail}" style="font-size:15pt;font-weight:bold;border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" value="{!priorHeader}" />
+            <apex:column rendered="{!priorDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!priorDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!priorDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            
+            <apex:column rendered="{!labDetail}" style="border-style: solid;border-width: thin;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!labDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!labDetail}" style="font-size:15pt;font-weight:bold;border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" value="{!labHeader}" />
+            <apex:column rendered="{!labDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!labDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            
+            <apex:column rendered="{!paymentDetail}" style="border-style: solid;border-width: thin;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!paymentDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!paymentDetail}" style="font-size:15pt;font-weight:bold;border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" value="{!paymentHeader}" />
+            <apex:column rendered="{!paymentDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!paymentDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!paymentDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            
+            <apex:column rendered="{!feeDetail}" style="border-style: solid;border-width: thin;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!feeDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!feeDetail}" style="font-size:15pt;font-weight:bold;border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" value="{!feeHeader}" />
+            <apex:column rendered="{!feeDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!feeDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!feeDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            
+            <apex:column rendered="{!pharmacyDetail}" style="border-style: solid;border-width: thin;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!pharmacyDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!pharmacyDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!pharmacyDetail}" style="font-size:15pt;font-weight:bold;border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" value="{!pharmacyHeader}" />
+            <apex:column rendered="{!pharmacyDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!pharmacyDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:none; text-align: center" title=""/>
+            <apex:column rendered="{!pharmacyDetail}" style="border-style: solid;border-width: thin;border-left-style:none;border-right-style:solid; text-align: center" title=""/>
+        </apex:pageBlockTable>
+    	<apex:pageBlockTable style="border-style: solid;border-width: thin; text-align: center" value="{!rules}" var="a">
+            <apex:column rendered="{!payorDetail}" style="border-style: solid;border-width: thin;padding:10px; text-align: left" value="{!a.Name_Of_Payor__c}" />
+            <apex:column rendered="{!payorDetail}" style="border-style: solid;border-width: thin;padding:10px; text-align: center" value="{!a.Payor_Products__c}"/>
+            <apex:column rendered="{!payorDetail}" style="border-style: solid;border-width: thin;padding:10px; text-align: left" value="{!a.FSC__c}"/>
+            <apex:column rendered="{!payorDetail}" style="border-style: solid;border-width: thin;padding:10px; text-align: center" value="{!a.PlanType__c}"/>
+            <apex:column rendered="{!payorDetail}" style="border-style: solid;border-width: thin;padding:10px; text-align: center" value="{!a.Payor_Details_New_Field_1__c}"/>
+            <apex:column rendered="{!payorDetail}" style="border-style: solid;border-width: thin;padding:10px; text-align: center" value="{!a.Payor_Details_New_Field_2__c}"/>
+            <apex:column rendered="{!payorDetail}" style="border-style: solid;border-width: thin;padding:10px; text-align: center" value="{!a.Payor_Details_New_Field_3__c}"/>
+            <apex:column rendered="{!claimDetail}" style="border-style: solid;border-width: thin;padding:10px; text-align: center" value="{!a.Initial_Claim_Filing_Limit__c}"/>
+            <apex:column rendered="{!claimDetail}" style="border-style: solid;border-width: thin;padding:10px; text-align: center" value="{!a.Payment__c}"/>
+            <apex:column rendered="{!claimDetail}" style="border-style: solid;border-width: thin;padding:10px; text-align: center" value="{!a.Claim_Appeal_Filing_Limit__c}"/>
+            <apex:column rendered="{!claimDetail}" style="border-style: solid;border-width: thin;padding:10px; text-align: center" value="{!a.Claim_Deadlines_New_Field_1__c}"/>
+            <apex:column rendered="{!claimDetail}" style="border-style: solid;border-width: thin;padding:10px; text-align: center" value="{!a.Claim_Deadlines_New_Field_2__c}"/>
+            <apex:column rendered="{!claimDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Claim_Deadlines_New_Field_3__c}"/>
+            <apex:column rendered="{!priorDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Referrals_Needed__c}"/>
+            <apex:column rendered="{!priorDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Precertification_Authorization__c}"/>
+            <apex:column rendered="{!priorDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.PreAuth_PreApproval_Radiation__c}"/>
+            <apex:column rendered="{!priorDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.PreAuth_PreApproval_Diagnostics__c}"/>
+            <apex:column rendered="{!priorDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Prior_Authorizations_New_Field_1__c}"/>
+            <apex:column rendered="{!priorDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Prior_Authorizations_New_Field_2__c}"/>
+            <apex:column rendered="{!priorDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Prior_Authorizations_New_Field_3__c}"/>
+            <apex:column rendered="{!labDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Lab_in_Office__c}"/>
+            <apex:column rendered="{!labDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Name_of_Reference_Lab__c}"/>
+            <apex:column rendered="{!labDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Lab_New_Field_1__c}"/>
+            <apex:column rendered="{!labDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Lab_New_Field_2__c}"/>
+            <apex:column rendered="{!labDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Lab_New_Field_3__c}"/>
+            <apex:column rendered="{!paymentDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Advanced_Practice_Providers__c}"/>
+            <apex:column rendered="{!paymentDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Required_to_Bill__c}"/>
+            <apex:column rendered="{!paymentDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.APP_Reimbursement__c}"/>
+            <apex:column rendered="{!paymentDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Payment_Basis_New_Field_1__c}"/>
+            <apex:column rendered="{!paymentDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Payment_Basis_New_Field_2__c}"/>
+            <apex:column rendered="{!paymentDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Payment_Basis_New_Field_3__c}"/>
+            <apex:column rendered="{!feeDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.MED_ONC_UROL__c}"/>
+            <apex:column rendered="{!feeDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.RAD_ONC__c}"/>
+            <apex:column rendered="{!feeDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.DRUGS__c}"/>
+            <apex:column rendered="{!feeDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Fee_Schedule_New_Field_1__c}"/>
+            <apex:column rendered="{!feeDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Fee_Schedule_New_Field_2__c}"/>
+            <apex:column rendered="{!feeDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Fee_Schedule_New_Field_3__c}"/>
+            <apex:column rendered="{!pharmacyDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Termination_W_O_Cause__c}"/>
+            <apex:column rendered="{!pharmacyDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.In_House_Pharmacy__c}"/>
+            <apex:column rendered="{!pharmacyDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Flow_Cytometry__c}"/>
+            <apex:column rendered="{!pharmacyDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: left" value="{!a.Comments__c}"/>
+            <apex:column rendered="{!pharmacyDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Pharmacy_New_Field_1__c}"/>
+            <apex:column rendered="{!pharmacyDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Pharmacy_New_Field_2__c}"/>
+            <apex:column rendered="{!pharmacyDetail}" style="border-style: solid;border-width: thin;padding:10px;  text-align: center" value="{!a.Pharmacy_New_Field_3__c}"/>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>APP_Reimbursement__c</fullName>
+        <description>Advanced Practice Provider Reimbursement</description>
+        <externalId>false</externalId>
+        <label>APP Reimbursement</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Advanced_Practice_Providers__c</fullName>
+        <description>Advanced Practice Providers (Nurse Practitioner/Physician Assistant) May Bill Payer Without Supervising Physician On Site</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Advanced Practice Providers (Nurse Practitioner/Physician Assistant) May Bill Payer Without Supervising Physician On Site</inlineHelpText>
+        <label>Advanced Practice Providers</label>
+        <length>150</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Claim_Appeal_Filing_Limit__c</fullName>
+        <externalId>false</externalId>
+        <label>Claim Appeal Filing Limit</label>
+        <length>150</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Claim_Deadlines_New_Field_1__c</fullName>
+        <description>New field added by user</description>
+        <externalId>false</externalId>
+        <label>Claim Deadlines New Field 1</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Claim_Deadlines_New_Field_2__c</fullName>
+        <description>New field added by user</description>
+        <externalId>false</externalId>
+        <label>Claim Deadlines New Field 2</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Claim_Deadlines_New_Field_3__c</fullName>
+        <description>New field added by user</description>
+        <externalId>false</externalId>
+        <label>Claim Deadlines New Field 3</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Claim_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Claim Type</label>
+        <length>20</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Comments__c</fullName>
+        <externalId>false</externalId>
+        <label>Comments</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>DRUGS__c</fullName>
+        <externalId>false</externalId>
+        <label>DRUGS</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Effective_Date__c</fullName>
+        <description>Date that the rule will be in effect</description>
+        <externalId>false</externalId>
+        <label>Effective Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>FSC__c</fullName>
+        <description>Separate numbers with commas</description>
+        <externalId>false</externalId>
+        <label>FSC</label>
+        <length>150</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Fee_Schedule_New_Field_1__c</fullName>
+        <description>New field added by user</description>
+        <externalId>false</externalId>
+        <label>Fee Schedule New Field 1</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Fee_Schedule_New_Field_2__c</fullName>
+        <description>New field added by user</description>
+        <externalId>false</externalId>
+        <label>Fee Schedule New Field 2</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Fee_Schedule_New_Field_3__c</fullName>
+        <description>New field added by user</description>
+        <externalId>false</externalId>
+        <label>Fee Schedule New Field 3</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Flow_Cytometry__c</fullName>
+        <externalId>false</externalId>
+        <label>Flow Cytometry</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>In_House_Pharmacy__c</fullName>
+        <externalId>false</externalId>
+        <label>In-House Pharmacy</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Initial_Claim_Filing_Limit__c</fullName>
+        <description>Number then time, i.e. 90 Days</description>
+        <externalId>false</externalId>
+        <label>Initial Claim Filing Limit</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Insurance_Class__c</fullName>
+        <externalId>false</externalId>
+        <label>Insurance Class</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Commercial</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Government</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Insurance_Company__c</fullName>
+        <externalId>false</externalId>
+        <label>Insurance Company</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Blue Cross Blue Shield</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Medicare</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Lab_New_Field_1__c</fullName>
+        <externalId>false</externalId>
+        <label>Lab New Field 1</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Lab_New_Field_2__c</fullName>
+        <externalId>false</externalId>
+        <label>Lab New Field 2</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Lab_New_Field_3__c</fullName>
+        <externalId>false</externalId>
+        <label>Lab New Field 3</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Lab_in_Office__c</fullName>
+        <externalId>false</externalId>
+        <label>Lab in Office</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MED_ONC_UROL__c</fullName>
+        <externalId>false</externalId>
+        <label>MED ONC/UROL</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name_Of_Payor__c</fullName>
+        <externalId>false</externalId>
+        <label>Name Of Payor</label>
+        <length>150</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name_of_Reference_Lab__c</fullName>
+        <externalId>false</externalId>
+        <label>Name of Reference Lab</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payment_Basis_New_Field_1__c</fullName>
+        <description>New field added by user</description>
+        <externalId>false</externalId>
+        <label>Payment Basis New Field 1</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Basis_New_Field_2__c</fullName>
+        <description>New field added by user</description>
+        <externalId>false</externalId>
+        <label>Payment Basis New Field 2</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Basis_New_Field_3__c</fullName>
+        <description>New field added by user</description>
+        <externalId>false</externalId>
+        <label>Payment Basis New Field 3</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Payment__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payor_Details_New_Field_1__c</fullName>
+        <description>New field added by user</description>
+        <externalId>false</externalId>
+        <label>Payor Details New Field 1</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Payor_Details_New_Field_2__c</fullName>
+        <description>New field added by user</description>
+        <externalId>false</externalId>
+        <label>Payor Details New Field 2</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Payor_Details_New_Field_3__c</fullName>
+        <description>New field added by user</description>
+        <externalId>false</externalId>
+        <label>Payor Details New Field 3</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Payor_Products__c</fullName>
+        <description>Indicate Name of Plan</description>
+        <externalId>false</externalId>
+        <label>Payor Products</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Pharmacy_New_Field_1__c</fullName>
+        <description>New field added by user</description>
+        <externalId>false</externalId>
+        <label>Pharmacy New Field 1</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Pharmacy_New_Field_2__c</fullName>
+        <description>New field added by user</description>
+        <externalId>false</externalId>
+        <label>Pharmacy New Field 2</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Pharmacy_New_Field_3__c</fullName>
+        <description>New field added by user</description>
+        <externalId>false</externalId>
+        <label>Pharmacy New Field 3</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>PlanType__c</fullName>
+        <description>Separate by commas</description>
+        <externalId>false</externalId>
+        <label>PlanType</label>
+        <length>150</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Plan_Code__c</fullName>
+        <description>A numbering system for each payor so in the future we could map what exists within existing billing systems into our system, i.e. BC001 (=BCBS of SC)
+                                                BC002 (=BCBS of NC)</description>
+        <externalId>false</externalId>
+        <label>Plan Code</label>
+        <length>5</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PreAuth_PreApproval_Diagnostics__c</fullName>
+        <externalId>false</externalId>
+        <label>PreAuth/PreApproval Diagnostics</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PreAuth_PreApproval_Radiation__c</fullName>
+        <externalId>false</externalId>
+        <label>PreAuth/PreApproval Radiation</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Precertification_Authorization__c</fullName>
+        <externalId>false</externalId>
+        <label>Precertification/Authorization</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Prior_Authorizations_New_Field_1__c</fullName>
+        <description>New field added by user</description>
+        <externalId>false</externalId>
+        <label>Prior Authorizations New Field 1</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Prior_Authorizations_New_Field_2__c</fullName>
+        <description>New field added by user</description>
+        <externalId>false</externalId>
+        <label>Prior Authorizations New Field 2</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Prior_Authorizations_New_Field_3__c</fullName>
+        <description>New field added by user</description>
+        <externalId>false</externalId>
+        <label>Prior Authorizations New Field 3</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>RAD_ONC__c</fullName>
+        <externalId>false</externalId>
+        <label>RAD ONC</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Referrals_Needed__c</fullName>
+        <externalId>false</externalId>
+        <label>Referrals Needed</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Required_to_Bill__c</fullName>
+        <description>Required to Bill in Advanced Practice Provider&apos;s Name</description>
+        <externalId>false</externalId>
+        <label>Required to Bill</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Rule__c</fullName>
+        <externalId>false</externalId>
+        <label>Rule</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Termination_W_O_Cause__c</fullName>
+        <externalId>false</externalId>
+        <label>Termination W/O Cause</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Rule</label>
+    <nameField>
+        <label>Rule Name</label>
+        <trackFeedHistory>true</trackFeedHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Rules</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

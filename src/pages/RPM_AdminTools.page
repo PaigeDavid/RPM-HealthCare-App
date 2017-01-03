@@ -1,0 +1,121 @@
+<apex:page controller="RPM_AdminToolsController" docType="html-5.0" showHeader="false" title="Admin Tools">
+    <apex:form >
+        <!--Header-->
+        <div align="center" draggable="false">
+            <apex:sectionHeader title="Admin Tools"/>
+        </div>
+        
+        <!--Breadcrumb trail-->
+        <apex:commandLink style="padding:10px;color:blue;" value="Home">
+        </apex:commandLink>
+        <apex:outputText value="> Admin Toolkit">
+        </apex:outputText>
+        <br/>
+        <br/>
+        <br/>
+        
+        <!--Data Editing Box-->
+        <!--TODO: Formatting numbers are hardcoded in currently, 
+					fix this for different size screens, based on percents-->
+        <apex:outputPanel styleClass="data_editing_text">
+            <apex:outputText value="Data Editing" style="font-size:150%;">
+        	</apex:outputText>
+        </apex:outputPanel>
+        <apex:outputPanel styleClass="data_editing">
+            <div align="center" style="padding-right: 10px;" draggable="false" >
+                <br/>
+                <br/>
+                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:10px;"  value="Enter/Import New Rules" action="{!goToImport}" >
+                </apex:commandLink>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:10px;"  value="Export/Display New Rules" action="{!goToExport}" >
+                </apex:commandLink>
+            </div>
+        </apex:outputPanel>
+        
+        <!--PlaceHolder Box-->
+        <!--TODO: Box to the right of the above box, same formatting-->
+        <apex:outputPanel styleClass="rule_edit_text">
+            <apex:outputText value="Edit Existing Rules" style="font-size:150%;">
+        	</apex:outputText>
+        </apex:outputPanel>
+        <apex:outputPanel styleClass="place_holder">
+            <div align="center" style="padding-right: 10px;" draggable="false" >
+                <br/>
+                <br/>
+                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:10px;"  value="Placeholder button">
+                </apex:commandLink>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:10px;"  value="Delete ALL rules (developer)" action="{!deleteAllRecords}" >
+                </apex:commandLink>
+            </div>
+        </apex:outputPanel>
+        
+    </apex:form>
+    
+    <style>
+        .data_editing_text {
+            background-color: transparent;
+        //border-width: 2px;
+        //border-style: solid;
+            padding:10px;
+            position: absolute;
+            width: 100px;
+        	height: 15px;
+            margin: 12px 12px 12px 12px;
+            top:90px;
+        	left:45px;
+            }
+    </style>
+    
+    <style>
+        .rule_edit_text {
+            background-color: transparent;
+        //border-width: 2px;
+        //border-style: solid;
+            padding:10px;
+            position: absolute;
+            width: 175px;
+        	height: 15px;
+            margin: 12px 12px 12px 12px;
+            top:90px;
+        	left:275px;
+            }
+    </style>
+    
+    <style>
+        .data_editing {
+            background-color: transparent;
+            border-width: 2px;
+            border-style: solid;
+            padding:10px;
+            position: absolute;
+            width: 200px;
+        	height: 150px;
+            margin: 12px 12px 12px 12px;
+            top:130px;
+            }
+    </style>
+    
+    <style>
+        .place_holder {
+            background-color: transparent;
+            border-width: 2px;
+            border-style: solid;
+            padding:10px;
+            position: absolute;
+            width: 200px;
+        	height: 150px;
+            margin: 12px 12px 12px 12px;
+            top:130px;
+        	left:250px;
+            }
+    </style>
+</apex:page>

@@ -1,0 +1,813 @@
+<apex:page controller="RPM_enterRulesController" docType="html-5.0" showHeader="false" title="Rule Entry">
+    <!--<style>
+        	body{background-color:#6D6E72;}
+    </style>
+	-->
+    <apex:form >
+        <!--Image-->
+        <apex:outputPanel styleClass="image_panel">
+            <apex:image id="theImage" value="http://rpm-healthcare.com/images/rpm_home_logo.gif" />
+        </apex:outputPanel>
+        <!--Header-->
+        <!--
+        <apex:outputPanel styleClass="header_panel">
+            <apex:outputText style="font-size:25px;" value="Rule Entry"/>
+        </apex:outputPanel>
+        -->
+        
+        <!--Breadcrumb trail-->
+        <apex:outputPanel styleClass="breadcrumb_panel">
+            <apex:commandLink style="padding-right:10px;color:blue;" value="Home"/>
+            <apex:outputText value=">"/>
+            <apex:commandLink style="padding:10px;color:blue;" value="Admin Toolkit" action="{!gotoAdminToolkit}">
+            </apex:commandLink>
+            <apex:outputText value=">"/>
+            <apex:outputText style="padding:10px;" value="Enter Rules">
+            </apex:outputText>
+        </apex:outputPanel>
+        
+        <p/>
+        <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
+        
+        <!--Import Rules-->
+        <apex:outputPanel styleClass="import_rules">
+            <apex:outputText style="margin-left:10em; font-weight: bold;" value="Import rules from a CSV file"/>
+            <br/> <br/>
+            <apex:inputFile style="padding:10px;" disabled="{!buttonEnable}" value="{!contentFile}" filename="{!nameFile}" /> 
+             <apex:commandButton disabled="{!buttonEnable}" styleClass="btn" style="margin-left:4em;text-decoration:none;padding:10px;" action="{!ReadFile}" value="Import Rules" id="theButton" />
+        </apex:outputPanel>
+        
+        <apex:outputPanel styleClass="date_panel">
+            <apex:outputText rendered="{!buttonEnable}" style="color:red; font-weight: bold;padding:10px;" value="Note: Effective date must have a value." />
+            <br/> <br/> 
+            <apex:outputText style="padding:10px;" value="Pick an effective date for the new rule:">
+            </apex:outputText>
+            <apex:input type="date" value="{!myDate}">
+                <apex:actionSupport action="{!enableSubmit}" event="onchange" />
+            </apex:input>
+        </apex:outputPanel>
+        <br/> <br/> <br/>
+        
+        <!--Rule Entering-->
+        <!--Payor Detail header and buttons -->
+        <apex:pageBlock >
+            <apex:outputPanel styleClass="detailHeader_panel">
+                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:9em;"  value="-" rendered="{!IF(newPayorDetail.size > 0, true, false)}" title="Subtract new field from payor details" action="{!loseField}" immediate="true">
+                    <apex:param name="payorDetail" assignTo="{!newFieldDetail}" value="Payor Details"/>
+                </apex:commandLink>
+                <apex:commandButton rendered="{!IF(newPayorDetail.size == 0, true, false)}" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:9em;" disabled="true" value="-" title="Can only remove new field that was added"/>
+                <apex:outputText style="font-size:14pt;margin-left:2em;position:absolute;text-decoration:underline" value="Payor Details"/> 
+                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:17em;"  value="+" rendered="{!IF(newPayorDetail.size < 3, true, false)}" title="Add field to payor details" action="{!showPopup}" immediate="true">
+                    <apex:param name="payorDetail" assignTo="{!newFieldDetail}" value="Payor Details"/>
+                </apex:commandLink>
+                <apex:commandButton rendered="{!IF(newPayorDetail.size == 3, true, false)}" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:17em;" disabled="true" value="+" title="Only 3 new fields allowed per section. Contact system admin for help."/>
+                <!--Claim Detail header and buttons -->
+                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:20em;"  value="-" rendered="{!IF(newClaimDeadline.size > 0, true, false)}" title="Subtract new field from payor details" action="{!loseField}" immediate="true">
+                    <apex:param name="claimDeadlines" assignTo="{!newFieldDetail}" value="Claim Deadlines"/>
+                </apex:commandLink>
+                <apex:commandButton rendered="{!IF(newClaimDeadline.size == 0, true, false)}" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:20em;" disabled="true" value="-" title="Can only remove new field that was added"/>
+                <apex:outputText style="font-size:14pt;margin-left:2em;position:absolute;text-decoration:underline" value="Claim Deadlines"/> 
+                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:19em;"  value="+" rendered="{!IF(newClaimDeadline.size < 3, true, false)}" title="Add field to claim deadlines" action="{!showPopup}" immediate="true" >
+                    <apex:param name="claimDeadlines" assignTo="{!newFieldDetail}" value="Claim Deadlines"/>
+                </apex:commandLink>
+                <apex:commandButton rendered="{!IF(newClaimDeadline.size == 3, true, false)}" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:19em;" disabled="true" value="+" title="Only 3 new fields allowed per section. Contact system admin for help."/>
+                <!--Prior Authorization Details-->
+                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:15em;"  value="-" rendered="{!IF(priorAuth.size > 0, true, false)}" title="Subtract field From Prior Authorizations" action="{!loseField}" immediate="true">
+                    <apex:param name="PriorAuth" assignTo="{!newFieldDetail}" value="Prior Authorizations"/>
+                </apex:commandLink>
+                <apex:commandButton rendered="{!IF(priorAuth.size == 0, true, false)}" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:15em;" disabled="true" value="-" title="Can only remove new field that was added"/>
+                <apex:outputText style="font-size:14pt;margin-left:2em;position:absolute;text-decoration:underline" value="Prior Authorizations"/> 
+                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:21em;" rendered="{!IF(priorAuth.size < 3, true, false)}" value="+" title="Add field to Prior Authorizations" action="{!showPopup}" immediate="true">
+                    <apex:param name="PriorAuth" assignTo="{!newFieldDetail}" value="Prior Authorizations"/>
+                </apex:commandLink>
+                <apex:commandButton rendered="{!IF(priorAuth.size == 3, true, false)}" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:21em;" disabled="true" value="+" title="Only 3 new fields allowed per section. Contact system admin for help."/>
+            </apex:outputPanel>
+            <br/> <br/> <br/> 
+            <!--Payor Details-->
+            <apex:outputPanel styleClass="payor_details" > 
+                <apex:outputText style="font-size:10pt;padding-left: 10px;" value="Name of Payor: ">
+                </apex:outputText>
+                <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Enter name of payor" value="{!nameOfPayor}">
+                </apex:inputTextarea>
+                <p/>
+                <br/>
+                <apex:outputText style="font-size:10pt;padding-left: 10px;" value="Payor Products: ">
+                </apex:outputText>
+                <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Indicate Payor Products" value="{!payorProducts}">
+                </apex:inputTextarea>
+                <p/>
+                <br/>
+                <apex:outputText style="font-size:10pt;padding-left: 10px;" value="FSC: ">
+                </apex:outputText>
+                <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Enter in FSC, separate by commas" value="{!FSC}">
+                </apex:inputTextarea>
+                <p/>
+                <br/>
+                <apex:outputText style="font-size:10pt;padding-left: 10px;" value="Plan Type: " >
+                </apex:outputText>
+                <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px;" title="Enter in plan type, separate by commas" value="{!planType}">
+                </apex:inputTextarea>
+                <!-- Hidden fields to be added when user adds new field-->
+                <apex:outputPanel rendered="{!IF(newPayorDetail.size > 0, true, false)}">
+                    <p/>
+                    <br/>
+                    <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="{!newPayorDetail[0]}:">
+                    </apex:outputText>
+                    <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Enter name of field" value="{!payorDetailInput[0]}">
+                    </apex:inputTextarea>
+                    <br/>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(newPayorDetail.size > 1, true, false)}">
+                    <p/>
+                    <br/>
+                    <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="{!newPayorDetail[1]}:">
+                    </apex:outputText>
+                    <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Enter name of field" value="{!payorDetailInput[1]}">
+                    </apex:inputTextarea>
+                    <br/>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(newPayorDetail.size > 2, true, false)}">
+                    <p/>
+                    <br/>
+                    <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="{!newPayorDetail[2]}:">
+                    </apex:outputText>
+                    <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Enter name of field" value="{!payorDetailInput[2]}">
+                    </apex:inputTextarea>
+                    <br/>
+                </apex:outputPanel>
+            </apex:outputPanel>
+            <!--Claim Deadline Details-->
+            <apex:outputPanel styleClass="claim_details">
+                <apex:outputText style="font-size:10pt;padding-left: 10px" value="Initial Claim Filing Limit: ">
+                </apex:outputText>
+                <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Initial Claim Filing Limit" value="{!initialFilingLimit}">
+                </apex:inputTextarea>
+                <p/>
+                <br/>
+                <apex:outputText style="font-size:10pt;padding-left:10px;" value="Payment: ">
+                </apex:outputText>
+                <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Enter a payment" value="{!payment}">
+                </apex:inputTextarea>
+                <p/>
+                <br/>
+                <apex:outputText style="font-size:10pt;padding-left:10px;" value="Claim Appeal Filing Limit: ">
+                </apex:outputText>
+                <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Enter a Claim Appeal Filing Limit" value="{!appealFilingLimit}">
+                </apex:inputTextarea>
+                <!-- Hidden fields to be added when user adds new field-->
+                <apex:outputPanel rendered="{!IF(newClaimDeadline.size > 0, true, false)}">
+                    <p/>
+                    <br/>
+                    <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="{!newClaimDeadline[0]}:">
+                    </apex:outputText>
+                    <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Enter name of field" value="{!claimDeadlineInput[0]}">
+                    </apex:inputTextarea>
+                    <br/>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(newClaimDeadline.size > 1, true, false)}">
+                    <p/>
+                    <br/>
+                    <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="{!newClaimDeadline[1]}:">
+                    </apex:outputText>
+                    <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Enter name of field" value="{!claimDeadlineInput[1]}">
+                    </apex:inputTextarea>
+                    <br/>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(newClaimDeadline.size > 2, true, false)}">
+                    <p/>
+                    <br/>
+                    <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="{!newClaimDeadline[2]}:">
+                    </apex:outputText>
+                    <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Enter name of field" value="{!claimDeadlineInput[2]}">
+                    </apex:inputTextarea>
+                    <br/>
+                </apex:outputPanel>
+            </apex:outputPanel>
+            <!--Prior Authorization details-->
+            <apex:outputPanel styleClass="prior_auth_details">
+                <apex:outputText style="font-size:10pt;padding-left: 10px" value="Referrals Needed? ">
+                </apex:outputText>
+                <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Are referrals needed?" value="{!referalsNeeded}">
+                </apex:inputTextarea>
+                <p/>
+                <br/>
+                <apex:outputText style="font-size:10pt;padding-left:10px;" value="Precertification/Authorization: ">
+                </apex:outputText>
+                <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Precertification/Authorization" value="{!precertAuth}">
+                </apex:inputTextarea>
+                <p/>
+                <br/>
+                <apex:outputText style="font-size:10pt;padding-left:10px" value="PreAuth/PreApproval: ">
+                </apex:outputText>
+                <apex:outputText style="font-size:10pt;position:absolute;padding-left:20px;left:200px;text-decoration:underline" value="Radiation">
+                </apex:outputText>
+                <apex:outputText style="font-size:10pt;position:absolute;padding-right:10px;right:10px;text-decoration:underline" value="Diagnostics">
+                </apex:outputText>
+                <p/>
+                <apex:inputText style="position:absolute;left:225px;width:40px" title="Radiation?" value="{!preauthRadiation}">
+                </apex:inputText>
+                <apex:inputText style="position:absolute;right:30px;width:40px" title="Diagnostics?" value="{!preauthDiagnostics}" >
+                </apex:inputText>
+                <!-- Hidden fields to be added when user adds new field-->
+                <apex:outputPanel rendered="{!IF(priorAuth.size > 0, true, false)}">
+                    <p/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="{!priorAuth[0]}:">
+                    </apex:outputText>
+                    <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Enter name of field" value="{!priorAuthInput[0]}">
+                    </apex:inputTextarea>
+                    <br/>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(priorAuth.size > 1, true, false)}">
+                    <p/>
+                    <br/>
+                    <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="{!priorAuth[1]}:">
+                    </apex:outputText>
+                    <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Enter name of field" value="{!priorAuthInput[1]}">
+                    </apex:inputTextarea>
+                    <br/>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(priorAuth.size > 2, true, false)}">
+                    <p/>
+                    <br/>
+                    <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="{!priorAuth[2]}:">
+                    </apex:outputText>
+                    <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Enter name of field" value="{!priorAuthInput[2]}">
+                    </apex:inputTextarea>
+                    <br/>
+                </apex:outputPanel>
+            </apex:outputPanel>
+            
+            <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
+            
+            <!--Lab Details-->
+            <apex:outputPanel styleClass="detailHeader_panel">
+                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:9em;"  value="-" rendered="{!IF(labDetail.size > 0, true, false)}" title="Subtract field From Lab Details" action="{!loseField}" immediate="true">
+                    <apex:param name="LabDetail" assignTo="{!newFieldDetail}" value="Lab Details"/>
+                </apex:commandLink>
+                <apex:commandButton rendered="{!IF(labDetail.size == 0, true, false)}" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:9em;" disabled="true" value="-" title="Can only remove new field that was added"/>
+                <apex:outputText style="font-size:14pt;margin-left:2em;position:absolute;text-decoration:underline" value="Lab Details"/> 
+                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:16em;" rendered="{!IF(labDetail.size < 3, true, false)}" value="+" title="Add field" action="{!showPopup}" immediate="true">
+                    <apex:param name="LabDetail" assignTo="{!newFieldDetail}" value="Lab Details"/>
+                </apex:commandLink>
+                <apex:commandButton rendered="{!IF(labDetail.size == 3, true, false)}" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:16em;" disabled="true" value="+" title="Only 3 new fields allowed per section. Contact system admin for help."/>
+                <!--Payment Basis--> 
+                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:21em;"  value="-" rendered="{!IF(payBasis.size > 0, true, false)}" title="Subtract field From Payment Basis" action="{!loseField}" immediate="true">
+                    <apex:param name="PaymentBasis" assignTo="{!newFieldDetail}" value="Payment Basis"/>
+                </apex:commandLink>
+                <apex:commandButton rendered="{!IF(payBasis.size == 0, true, false)}" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:21em;" disabled="true" value="-" title="Can only remove new field that was added"/>
+                <apex:outputText style="font-size:14pt;margin-left:2em;position:absolute;text-decoration:underline" value="Payment Basis"/> 
+                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:19em;" rendered="{!IF(payBasis.size < 3, true, false)}" value="+" title="Add field to Payment Basis" action="{!showPopup}" immediate="true">
+                    <apex:param name="PaymentBasis" assignTo="{!newFieldDetail}" value="Payment Basis"/>
+                </apex:commandLink>
+                <apex:commandButton rendered="{!IF(payBasis.size == 3, true, false)}" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:19em;" disabled="true" value="+" title="Only 3 new fields allowed per section. Contact system admin for help."/>
+                <!--Fee Schedule-->
+                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:18em;"  value="-" rendered="{!IF(feeSchedule.size > 0, true, false)}" title="Subtract field From Fee Schedule" action="{!loseField}" immediate="true">
+                    <apex:param name="FeeSchedule" assignTo="{!newFieldDetail}" value="Fee Schedule"/>
+                </apex:commandLink>
+                <apex:commandButton rendered="{!IF(feeSchedule.size == 0, true, false)}" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:18em;" disabled="true" value="-" title="Can only remove new field that was added"/>
+                <apex:outputText style="font-size:14pt;margin-left:2em;position:absolute;text-decoration:underline" value="Fee Schedule"/> 
+                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:17em;" rendered="{!IF(feeSchedule.size < 3, true, false)}" value="+" title="Add field to fee schedule" action="{!showPopup}" immediate="true">
+                    <apex:param name="FeeSchedule" assignTo="{!newFieldDetail}" value="Fee Schedule"/>
+                </apex:commandLink>
+                <apex:commandButton rendered="{!IF(feeSchedule.size == 3, true, false)}" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:17em;" disabled="true" value="+" title="Only 3 new fields allowed per section. Contact system admin for help."/>
+            </apex:outputPanel>   
+            <br/> <br/> <br/>
+            <!--Lab Details-->
+            <apex:outputPanel styleClass="lab_details">
+                <apex:outputText style="font-size:10pt;padding-left: 10px" value="Lab in office?">
+                </apex:outputText>
+                <apex:inputText style="padding-right:10px;position:absolute;right:10px;width:180px" title="Lab in office?" value="{!labInOffice}" >
+                </apex:inputText>
+                <p/>
+                <br/>
+                <apex:outputText style="font-size:10pt;padding-left:10px;" value="Name of Reference Lab: ">
+                </apex:outputText>
+                <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Name of Reference Lab" value="{!nameReferenceLab}">
+                </apex:inputTextarea>
+                <!-- Hidden fields to be added when user adds new field-->
+                <apex:outputPanel rendered="{!IF(labDetail.size > 0, true, false)}">
+                    <p/>
+                    <br/>
+                    <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="{!labDetail[0]}:">
+                    </apex:outputText>
+                    <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Enter name of field" value="{!labDetailInput[0]}">
+                    </apex:inputTextarea>
+                    <br/>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(labDetail.size > 1, true, false)}">
+                    <p/>
+                    <br/>
+                    <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="{!labDetail[1]}:">
+                    </apex:outputText>
+                    <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Enter name of field" value="{!labDetailInput[1]}">
+                    </apex:inputTextarea>
+                    <br/>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(labDetail.size > 2, true, false)}">
+                    <p/>
+                    <br/>
+                    <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="{!labDetail[2]}:">
+                    </apex:outputText>
+                    <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Enter name of field" value="{!labDetailInput[2]}">
+                    </apex:inputTextarea>
+                    <br/>
+                </apex:outputPanel>
+            </apex:outputPanel>        
+            <!-- Payment Basis Detail-->
+            <apex:outputPanel styleClass="payment_basis_details">
+                <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:220px;position:absolute;" value="Advanced Practice Providers (Nurse Practitioner/Physician Assistant) May Bill Payer Without Supervising Physician On Site ">
+                </apex:outputText>
+                <p/>
+                <br/>
+                <br/>
+                <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Advanced Practice Providers" value="{!aPP}">
+                </apex:inputTextarea>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="Required to Bill in Advanced Practice Provider's Name: ">
+                </apex:outputText>
+                <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Required to Bill in Advanced Practice Provider's Name" value="{!requiredToBillAPP}">
+                </apex:inputTextarea>
+                <p/>
+                <br/>
+                <br/>
+                <br/>
+                <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="Advanced Practice Provider Reimbursement: ">
+                </apex:outputText>
+                <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Advanced Practice Provider Reimbursement" value="{!aPPReimburse}">
+                </apex:inputTextarea>
+                <!-- Hidden fields to be added when user adds new field-->
+                <apex:outputPanel rendered="{!IF(payBasis.size > 0, true, false)}">
+                    <p/>
+                    <br/>
+                    <br/>
+                    <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="{!payBasis[0]}:">
+                    </apex:outputText>
+                    <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Enter name of field" value="{!payBasisInput[0]}">
+                    </apex:inputTextarea>
+                    <br/>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(payBasis.size > 1, true, false)}">
+                    <p/>
+                    <br/>
+                    <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="{!payBasis[1]}:">
+                    </apex:outputText>
+                    <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Enter name of field" value="{!payBasisInput[1]}">
+                    </apex:inputTextarea>
+                    <br/>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(payBasis.size > 2, true, false)}">
+                    <p/>
+                    <br/>
+                    <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="{!payBasis[2]}:">
+                    </apex:outputText>
+                    <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Enter name of field" value="{!payBasisInput[2]}">
+                    </apex:inputTextarea>
+                    <br/>
+                </apex:outputPanel>
+            </apex:outputPanel>
+            <!--Fee Schedule Details-->
+            <apex:outputPanel styleClass="fee_schedule_details">
+                <apex:outputText style="font-size:12pt;position:absolute;left:155px;text-decoration:underline" value="Reimbursement">
+                </apex:outputText>
+                <p/>
+                <br/>
+                <br/>
+                <apex:outputText style="font-size:10pt;padding-left: 10px" value="MED ONC/UROL: ">
+                </apex:outputText>
+                <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="MED ONC/UROL" value="{!reimburseMed}">
+                </apex:inputTextarea>
+                <p/>
+                <br/>
+                <br/>
+                <apex:outputText style="font-size:10pt;padding-left:10px;" value="RAD ONC: ">
+                </apex:outputText>
+                <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="RAD ONC" value="{!reimburseRad}">
+                </apex:inputTextarea>
+                <p/>
+                <br/>
+                <br/>
+                <apex:outputText style="font-size:10pt;padding-left:10px;" value="DRUGS: ">
+                </apex:outputText>
+                <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="DRUGS" value="{!reimburseDrugs}">
+                </apex:inputTextarea>
+                <!-- Hidden fields to be added when user adds new field-->
+                <apex:outputPanel rendered="{!IF(feeSchedule.size > 0, true, false)}">
+                    <p/>
+                    <br/>
+                    <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="{!feeSchedule[0]}:">
+                    </apex:outputText>
+                    <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Enter name of field" value="{!feeScheduleInput[0]}">
+                    </apex:inputTextarea>
+                    <br/>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(feeSchedule.size > 1, true, false)}">
+                    <p/>
+                    <br/>
+                    <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="{!feeSchedule[1]}:">
+                    </apex:outputText>
+                    <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Enter name of field" value="{!feeScheduleInput[1]}">
+                    </apex:inputTextarea>
+                    <br/>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(feeSchedule.size > 2, true, false)}">
+                    <p/>
+                    <br/>
+                    <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="{!feeSchedule[2]}:">
+                    </apex:outputText>
+                    <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Enter name of field" value="{!feeScheduleInput[2]}">
+                    </apex:inputTextarea>
+                    <br/>
+                </apex:outputPanel>
+            </apex:outputPanel>
+            
+            <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> 
+            
+            <!--Pharmacy-->
+            <apex:outputPanel styleClass="detailHeader_panel">
+                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:54em;"  value="-" rendered="{!IF(pharmacy.size > 0, true, false)}" title="Subtract field From Pharmacy" action="{!loseField}" immediate="true">
+                    <apex:param name="Pharmacy" assignTo="{!newFieldDetail}" value="Pharmacy"/>
+                </apex:commandLink>
+                <apex:commandButton rendered="{!IF(pharmacy.size == 0, true, false)}" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:54em;" disabled="true" value="-" title="Can only remove new field that was added"/>
+                <apex:outputText style="font-size:14pt;margin-left:2em;position:absolute;text-decoration:underline" value="Pharmacy"/> 
+                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:15em;" rendered="{!IF(pharmacy.size < 3, true, false)}" value="+" title="Add field to Pharmacy" action="{!showPopup}" immediate="true">
+                    <apex:param name="Pharmacy" assignTo="{!newFieldDetail}" value="Pharmacy"/>
+                </apex:commandLink>
+                <apex:commandButton rendered="{!IF(pharmacy.size == 3, true, false)}" style="text-decoration:none;padding:5px;padding-left:10px;padding-right:10px;margin-left:15em;" disabled="true" value="+" title="Only 3 new fields allowed per section. Contact system admin for help."/>
+            </apex:outputPanel>
+            <br/> <br/> <br/>
+            <!--Pharmacy Details-->
+            <apex:outputPanel styleClass="pharmacy_details">
+                <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:220px;position:absolute;" value="Termination: W/O Cause:">
+                </apex:outputText>
+                <apex:inputTextarea style="padding-left:10px;position:absolute;left:215px;width:180px;height:15px" title="Termination: W/O Cause" value="{!termWOCause}">
+                </apex:inputTextarea>
+                <apex:outputText style="font-size:10pt;padding-left: 10px;padding-left:460px;position:absolute;" value="Comments: ">
+                </apex:outputText>
+                <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:720px;height:95px" title="Comments" value="{!comments}">
+                </apex:inputTextarea>
+                <p/>
+                <br/>
+                <br/>
+                <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="In-House Pharmacy: ">
+                </apex:outputText>
+                <apex:inputTextarea style="padding-right:10px;position:absolute;left:215px;width:180px;height:15px" title="In-House Pharmacy" value="{!inHousePharmacy}">
+                </apex:inputTextarea>
+                <p/>
+                <br/>
+                <br/>
+                <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="Flow Cytometry: ">
+                </apex:outputText>
+                <apex:inputTextarea style="padding-right:10px;position:absolute;left:215px;width:180px;height:15px" title="Flow Cytometry" value="{!flowCytometry}">
+                </apex:inputTextarea>
+                <!-- Hidden fields to be added when user adds new field-->
+                <apex:outputPanel rendered="{!IF(pharmacy.size > 0, true, false)}">
+                    <p/>
+                    <br/>
+                    <br/>
+                    <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="{!pharmacy[0]}:">
+                    </apex:outputText>
+                    <apex:inputTextarea style="padding-left:10px;position:absolute;left:215px;width:180px;height:15px" title="Enter name of field" value="{!pharmacyInput[0]}">
+                    </apex:inputTextarea>
+                    <br/>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(pharmacy.size > 1, true, false)}">
+                    <p/>
+                    <br/>
+                    <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="{!pharmacy[1]}:">
+                    </apex:outputText>
+                    <apex:inputTextarea style="padding-left:10px;position:absolute;left:215px;width:180px;height:15px" title="Enter name of field" value="{!pharmacyInput[1]}">
+                    </apex:inputTextarea>
+                    <br/>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(pharmacy.size > 2, true, false)}">
+                    <p/>
+                    <br/>
+                    <apex:outputText style="font-size:10pt;padding-left: 10px;text-align:left;padding-right:200px;position:absolute;" value="{!pharmacy[2]}:">
+                    </apex:outputText>
+                    <apex:inputTextarea style="padding-left:10px;position:absolute;left:215px;width:180px;height:15px" title="Enter name of field" value="{!pharmacyInput[2]}">
+                    </apex:inputTextarea>
+                    <br/>
+                </apex:outputPanel>
+            </apex:outputPanel>
+            
+            <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
+            
+            <!--POPUP screen-->
+            <apex:outputPanel id="tstpopup">
+                <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayPopUp}"/>
+                <apex:outputPanel styleClass="custPopup" layout="block" rendered="{!displayPopUp}">
+                    <center><b>Add new field</b></center><br/>
+                    <apex:outputText value="Enter name of new field for {!newFieldDetail}:">
+                    </apex:outputText>
+                    <apex:inputTextarea style="position:absolute;left:300px;width:180px;height:20px"  title="New Detail Field Name" value="{!newFieldName}">
+                    </apex:inputTextarea>
+                    <br/><br/><br/>
+                    <intput style="float: left;"><apex:commandlink styleClass="btn" style="text-decoration:none;padding:5px;" value="Cancel" action="{!closePopup}" immediate="true"/></intput>
+                    <intput style="float: right;"><apex:commandlink styleClass="btn" style="text-decoration:none;padding:5px;" value="Add New Field" action="{!addNewDetail}"/></intput>
+                    <br/>
+                </apex:outputPanel>
+            </apex:outputPanel>
+            
+            <!--Submit Rule and Cancel buttons-->
+            <apex:outputPanel styleClass="submit_rules">
+                <br/>
+                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:10px;padding-left:15px;padding-right:15px"  value="Cancel" action="{!clearFields}">
+                </apex:commandLink>
+                <apex:commandButton disabled="{!buttonEnable}" styleClass="btn" style="text-decoration:none;padding:10px;margin-left:3.5em;"  value="Submit Rule" action="{!submitRule}">
+                </apex:commandButton>
+            </apex:outputPanel>
+            
+            <!--Exceptions list display-->
+            <apex:outputPanel id="exceptionsPopup">
+                <apex:outputPanel styleClass="exceptionPopupBackground" layout="block" rendered="{!(exceptionUpload || exceptionInsert)}"/>
+                <apex:outputPanel styleClass="exceptionPopup" layout="block" rendered="{!(exceptionUpload || exceptionInsert)}">
+                    <!-- After the user clicks the 'Upload File' button, this section displays any exceptions thrown due to errors -->
+                    <apex:pageBlock rendered="{!exceptionUpload}" >
+                        <apex:outputText style="color:red; font-weight: bold;padding:10px;" value="Upload error: {!exceptionMessageUpload}" rendered="{!exceptionUpload}"/>
+                        <br/> <br/> <br/>
+                    </apex:pageBlock>
+                    <apex:pageBlock rendered="{!exceptionInsert}">
+                        <apex:outputText style="color:red; font-weight: bold;padding:10px;" value="Insert error: {!exceptionMessageInsert}" rendered="{!exceptionInsert}"/>
+                        <br/> <br/> <br/>
+                    </apex:pageBlock>
+                    <br/><br/><br/>
+                    <intput style="float: right;"><apex:commandlink styleClass="btn" style="text-decoration:none;padding:5px;" value="Close" action="{!clearException}"/></intput>
+                    <br/>
+                </apex:outputPanel>
+            </apex:outputPanel>
+            
+            <!-- Rules that were added in -->
+            <apex:outputPanel id="addedRulespopup">
+                <apex:outputPanel styleClass="popupRuleImportBackground" layout="block" rendered="{!(!(exceptionUpload || exceptionInsert) && NOT(ISNULL(uploadedRules)))}"/>
+                <apex:outputPanel styleClass="popupRuleImport" layout="block" rendered="{!(!(exceptionUpload || exceptionInsert) && NOT(ISNULL(uploadedRules)))}">
+                    <!-- After the user clicks the 'Upload File' button, this section displays the inserted data -->
+                    <apex:pageBlock >
+                        <apex:pageblocktable value="{!uploadedRules}" var="rules" rendered="{!(!(exceptionUpload || exceptionInsert) && NOT(ISNULL(uploadedRules)))}">
+                            <apex:column headerValue="Rule Name">
+                                <apex:outputField value="{!rules.Name}"/>
+                            </apex:column>
+                        </apex:pageblocktable>
+                    </apex:pageBlock>
+                    <br/><br/><br/>
+                    <intput style="float: right;"><apex:commandlink styleClass="btn" style="text-decoration:none;padding:5px;" value="Close" action="{!clearUploadedRules}"/></intput>
+                    <br/>
+                </apex:outputPanel>
+            </apex:outputPanel>
+            
+        </apex:pageBlock>
+    </apex:form>
+	<style>
+    	.image_panel {
+        	background-color: transparent;
+            position: absolute;
+        	overflow:auto;
+        	left:550px;
+        }
+    </style>
+    <style>
+    	.header_panel {
+        	background-color: transparent;
+            padding:10px;
+            position: absolute;
+            width: 300px;
+        	height: 40px;
+        	left: 550px;
+        	overflow:auto;
+            margin: 10px 10px 10px 10px;
+        }
+    </style>
+	<style>
+    	.breadcrumb_panel {
+        	background-color: transparent;
+            padding:10px;
+            position: absolute;
+            width: 500px;
+        	height: 40px;
+        	overflow:auto;
+            margin: 10px 10px 10px 10px;
+        }
+    </style>
+    <style>
+    	.date_panel{
+        	background-color: transparent;
+        	border-width: 1px;
+            border-style: solid;
+            padding:10px;
+            position: absolute;
+        	left:902px;
+        	width:400px;
+        	top:9px;
+        	overflow:auto;
+            margin: 10px 10px 10px 10px;
+        }
+    </style>
+    <style>
+    	.detailHeader_panel {
+        	background-color: transparent;
+            padding:10px;
+            position: absolute;
+            width: 1300px;
+        	height: 30px;
+        	overflow:auto;
+            margin: 10px 10px 10px 10px;
+        }
+    </style>
+    <style>
+        .payor_details {
+            background-color: transparent;
+        	border-width: 2px;
+            border-style: solid;
+            padding:10px;
+            position: absolute;
+            width: 400px;
+        	height: 140px;
+        	overflow:auto;
+            margin: 10px 10px 10px 10px;
+            }
+    </style>
+    <style>
+        .claim_details {
+            background-color: transparent;
+        	border-width: 2px;
+            border-style: solid;
+            padding:10px;
+            position: absolute;
+            width: 400px;
+        	height: 140px;
+        	overflow:auto;
+            margin: 10px 10px 10px 10px;
+        	left: 450px;
+            }
+    </style>
+    <style>
+        .prior_auth_details {
+            background-color: transparent;
+        	border-width: 2px;
+            border-style: solid;
+            padding:10px;
+            position: absolute;
+            width: 400px;
+        	height: 140px;
+        	overflow:auto;
+            margin: 10px 10px 10px 10px;
+        	left: 900px;
+            }
+    </style>
+    <style>
+        .lab_details {
+            background-color: transparent;
+        	border-width: 2px;
+            border-style: solid;
+            padding:10px;
+            position: absolute;
+            width: 400px;
+        	height: 180px;
+        	overflow:auto;
+            margin: 10px 10px 10px 10px;
+            }
+    </style>
+    <style>
+        .payment_basis_details {
+            background-color: transparent;
+        	border-width: 2px;
+            border-style: solid;
+            padding:10px;
+            position: absolute;
+            width: 400px;
+        	height: 180px;
+        	overflow:auto;
+            margin: 10px 10px 10px 10px;
+        	left:450px;
+            }
+    </style>
+    <style>
+        .fee_schedule_details {
+            background-color: transparent;
+        	border-width: 2px;
+            border-style: solid;
+            padding:10px;
+            position: absolute;
+            width: 400px;
+        	height: 180px;
+        	overflow:auto;
+            margin: 10px 10px 10px 10px;
+        	left: 900px;
+            }
+    </style>
+    <style>
+        .pharmacy_details {
+            background-color: transparent;
+        	border-width: 2px;
+            border-style: solid;
+            padding:10px;
+            position: absolute;
+            width: 1300px;
+        	height: 100px;
+        	overflow:auto;
+            margin: 10px 10px 10px 10px;
+            }
+    </style>
+    <style>
+        .import_rules { 
+        	background-color: transparent;
+        	border-width: 1px;
+            border-style: solid;
+            padding:10px;
+            position: absolute;
+            margin: 12px 12px 12px 12px;
+        	height:60px;
+        	width: 400px;
+        	left:900px;
+        	top:80px;
+            }
+    </style>
+    <style>
+        .submit_rules {
+            background-color: transparent;
+            position: absolute;
+            margin: 12px 12px 12px 10px;
+       		left:1110px;
+            }
+    </style>
+    <style type="text/css">
+        .custPopup{
+            background-color: white;
+            border-width: 2px;
+            border-style: solid;
+            z-index: 9999;
+            left: 50%;
+            padding:10px;
+            position: absolute;
+            width: 600px;
+            margin-left: -250px;
+            top:100px;
+        }
+        .popupBackground{
+            background-color:black;
+            opacity: 0.20;
+            filter: alpha(opacity = 20);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9998;
+        }
+        .popupRuleImport{
+            background-color: white;
+            border-width: 2px;
+            border-style: solid;
+            z-index: 9999;
+            left: 50%;
+            padding:10px;
+            position: absolute;
+            width: 600px;
+       	 	height: 800px;
+        	overflow: auto;
+            margin-left: -250px;
+            top:100px;
+        }
+        .popupRuleImportBackground{
+            background-color:black;
+            opacity: 0.20;
+            filter: alpha(opacity = 20);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9998;
+        }
+        .exceptionPopup{
+            background-color: white;
+            border-width: 2px;
+            border-style: solid;
+            z-index: 9999;
+            left: 50%;
+            padding:10px;
+            position: absolute;
+            width: 600px;
+            margin-left: -250px;
+            top:100px;
+        }
+        .exceptionPopupBackground{
+            background-color:black;
+            opacity: 0.20;
+            filter: alpha(opacity = 20);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9998;
+        }
+
+    </style>
+
+</apex:page>
