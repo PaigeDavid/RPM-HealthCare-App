@@ -4,7 +4,7 @@ Their website is http://rpm-healthcare.com/
   
 The create/import page allows a user to create a new rule and adding it to the rule sets, where they can add new fields if needed. They can also import from a CSV file to make it easier, as long as they follow the standard template.  
 
-https://github.com/PaigeDavid/RPM-HealthCare-App/blob/master/importPage.PNG
+![alt tag](https://github.com/PaigeDavid/RPM-HealthCare-App/blob/master/importPage.PNG)  
 
 The display/export page allows a user to view each of the given rules, search for a rule by a chosen field, or filter out fields they do not need to see and then export these rules into a CSV file.  
 
