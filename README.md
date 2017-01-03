@@ -12,4 +12,4 @@ The display/export page allows a user to view each of the given rules, search fo
 
 Provided is a CSV file of the rules for <a href="https://github.com/PaigeDavid/RPM-HealthCare-App/blob/master/FCA%20Payor%20Matrix%20111815(2810).csv"> FLORIDA CANCER AFFILIATES</a>, as well as screenshots of the import and export pages.
 
-<a href="https://login.salesforce.com/packaging/installPackage.apexp?p0=04t36000000lbrA"> Install the unmanaged package here</a>  or download the code and add it to your org. 
+<a href="https://login.salesforce.com/packaging/installPackage.apexp?p0=04t36000000lbsN"> Install the unmanaged package here</a>  or download the code and add it to your org. 
