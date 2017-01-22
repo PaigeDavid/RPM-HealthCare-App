@@ -14,64 +14,133 @@
         <br/>
         <br/>
         
+        <apex:outputPanel rendered="{!(!buttonsRendered)}">
+            <apex:outputPanel styleClass="parent_choice_text">
+                <apex:outputText value="Pick a practice to view rules" style="font-size:150%;">
+                </apex:outputText>
+            </apex:outputPanel>
+        	<apex:outputPanel styleClass="parent_choice">
+            	<apex:selectList id="FieldNames"  value="{!selectedField}" title="Select an Field" required="true" size="1" multiselect="false">
+                    <apex:selectOptions value="{!fieldNames}" />
+                </apex:selectList>
+                <br/> <br/> <br/> <br/>
+                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:10px;margin-left:27em;"  value="Select Practice" action="{!enableButtons}" >
+                </apex:commandLink>
+                <br/> <br/> <br/>
+            </apex:outputPanel>
+        </apex:outputPanel>
+        
+        <apex:outputPanel rendered="{!(!buttonsRendered)}">
+            <apex:outputPanel styleClass="new_parent_text">
+                <apex:outputText value="Create a new Practice" style="font-size:150%;">
+                </apex:outputText>
+            </apex:outputPanel>
+        	<apex:outputPanel id="newParent" styleClass="new_parent">
+                <apex:outputText value="Enter Practice Name"/>
+                <apex:inputTextarea style="padding-right:10px;position:absolute;right:10px;width:180px;height:15px" title="Parent name" value="{!newPracticeName}"/>
+                <br/> <br/> <br/> <br/>
+                <apex:commandButton style="text-decoration:none;padding:10px;margin-left:27em;"  value="Create Practice" action="{!createParent}" >
+                </apex:commandButton>
+                <br/> <br/> <br/>
+            </apex:outputPanel>
+        </apex:outputPanel>
+        
         <!--Data Editing Box-->
         <!--TODO: Formatting numbers are hardcoded in currently, 
-					fix this for different size screens, based on percents-->
-        <apex:outputPanel styleClass="data_editing_text">
-            <apex:outputText value="Data Editing" style="font-size:150%;">
-        	</apex:outputText>
+		fix this for different size screens, based on percents-->
+        <apex:outputPanel rendered="{!buttonsRendered}">
+            <apex:outputText style="padding-left:10px;font-size:150%;font-weight:bold;" value="{!displayedPracticeName}"/>
+            <apex:outputPanel styleClass="data_editing_text">
+                <apex:outputText value="Data Editing" style="font-size:150%;">
+                </apex:outputText>
+            </apex:outputPanel>
+            <apex:outputPanel styleClass="data_editing">
+                <div align="center" style="padding-right: 10px;" draggable="false" >
+                    <br/>
+                    <br/>
+                    <apex:commandLink styleClass="btn" style="text-decoration:none;padding:10px;"  value="Enter/Import New Rules" action="{!goToImport}" >
+                    </apex:commandLink>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <apex:commandLink styleClass="btn" style="text-decoration:none;padding:10px;"  value="Export/Display New Rules" action="{!goToExport}" >
+                    </apex:commandLink>
+                </div>
+            </apex:outputPanel>
+            
+            <!--PlaceHolder Box-->
+            <!--TODO: Box to the right of the above box, same formatting-->
+            <apex:outputPanel styleClass="rule_edit_text">
+                <apex:outputText value="Developer Buttons" style="font-size:150%;">
+                </apex:outputText>
+            </apex:outputPanel>
+            <apex:outputPanel styleClass="place_holder">
+                <div align="center" style="padding-right: 10px;" draggable="false" >
+                    <br/>
+                    <br/>
+                    <apex:commandLink styleClass="btn" style="text-decoration:none;padding:10px;"  value="Choose New Parent" action="{!enableButtons}">
+                    </apex:commandLink>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <apex:commandLink styleClass="btn" style="text-decoration:none;padding:10px;"  value="Delete ALL rules (developer)" action="{!deleteAllRecords}" >
+                    </apex:commandLink>
+                </div>
+            </apex:outputPanel>
         </apex:outputPanel>
-        <apex:outputPanel styleClass="data_editing">
-            <div align="center" style="padding-right: 10px;" draggable="false" >
-                <br/>
-                <br/>
-                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:10px;"  value="Enter/Import New Rules" action="{!goToImport}" >
-                </apex:commandLink>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:10px;"  value="Export/Display New Rules" action="{!goToExport}" >
-                </apex:commandLink>
-            </div>
-        </apex:outputPanel>
-        
-        <!--PlaceHolder Box-->
-        <!--TODO: Box to the right of the above box, same formatting-->
-        <apex:outputPanel styleClass="rule_edit_text">
-            <apex:outputText value="Edit Existing Rules" style="font-size:150%;">
-        	</apex:outputText>
-        </apex:outputPanel>
-        <apex:outputPanel styleClass="place_holder">
-            <div align="center" style="padding-right: 10px;" draggable="false" >
-                <br/>
-                <br/>
-                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:10px;"  value="Placeholder button">
-                </apex:commandLink>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <apex:commandLink styleClass="btn" style="text-decoration:none;padding:10px;"  value="Delete ALL rules (developer)" action="{!deleteAllRecords}" >
-                </apex:commandLink>
-            </div>
-        </apex:outputPanel>
-        
     </apex:form>
-    
     <style>
-        .data_editing_text {
+        .parent_choice_text {
             background-color: transparent;
-        //border-width: 2px;
-        //border-style: solid;
             padding:10px;
             position: absolute;
-            width: 100px;
+        //width: 100px;
         	height: 15px;
             margin: 12px 12px 12px 12px;
             top:90px;
-        	left:45px;
+        	left:75px;
+            }
+    </style>
+    <style>
+        .parent_choice {
+            background-color: transparent;
+        	border-width: 2px;
+        	border-style: solid;
+            padding:10px;
+            position: absolute;
+        //width: 200px;
+        //height: 150px;
+            margin: 12px 12px 12px 12px;
+            top:130px;
+            }
+    </style>
+    
+    <style>
+        .new_parent_text {
+            background-color: transparent;
+            padding:10px;
+            position: absolute;
+        //width: 100px;
+        	height: 15px;
+            margin: 12px 12px 12px 12px;
+            top:270px;
+        	left:100px;
+            }
+    </style>
+    <style>
+        .new_parent {
+            background-color: transparent;
+        	border-width: 2px;
+        	border-style: solid;
+            padding:10px;
+            position: absolute;
+        //width: 200px;
+        //height: 150px;
+            margin: 12px 12px 12px 12px;
+            top:310px;
             }
     </style>
     
@@ -85,8 +154,22 @@
             width: 175px;
         	height: 15px;
             margin: 12px 12px 12px 12px;
-            top:90px;
+            top:160px;
         	left:275px;
+            }
+    </style>
+    <style>
+        .data_editing_text {
+            background-color: transparent;
+        //border-width: 2px;
+        //border-style: solid;
+            padding:10px;
+            position: absolute;
+            width: 100px;
+        	height: 15px;
+            margin: 12px 12px 12px 12px;
+            top:160px;
+        	left:45px;
             }
     </style>
     
@@ -100,7 +183,8 @@
             width: 200px;
         	height: 150px;
             margin: 12px 12px 12px 12px;
-            top:130px;
+            top:200px;
+        	left:0px;
             }
     </style>
     
@@ -114,7 +198,7 @@
             width: 200px;
         	height: 150px;
             margin: 12px 12px 12px 12px;
-            top:130px;
+            top:200px;
         	left:250px;
             }
     </style>

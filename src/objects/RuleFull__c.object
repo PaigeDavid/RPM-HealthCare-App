@@ -122,6 +122,33 @@
         <type>TextArea</type>
     </fields>
     <fields>
+        <fullName>Claim_Details_Field1_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Claim Details Field1 Name</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Claim_Details_Field2_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Claim Details Field2 Name</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Claim_Details_Field3_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Claim Details Field3 Name</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Claim_Type__c</fullName>
         <externalId>false</externalId>
         <label>Claim Type</label>
@@ -174,6 +201,33 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Fee_Details_Field1_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Fee Details Field1 Name</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Fee_Details_Field2_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Fee Details Field2 Name</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Fee_Details_Field3_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Fee Details Field3 Name</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
     </fields>
     <fields>
         <fullName>Fee_Schedule_New_Field_1__c</fullName>
@@ -240,45 +294,31 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Insurance_Class__c</fullName>
+        <fullName>Lab_Details_Field1_Name__c</fullName>
         <externalId>false</externalId>
-        <label>Insurance Class</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Commercial</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Government</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
+        <label>Lab Details Field1 Name</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackTrending>false</trackTrending>
-        <type>Picklist</type>
+        <type>TextArea</type>
     </fields>
     <fields>
-        <fullName>Insurance_Company__c</fullName>
+        <fullName>Lab_Details_Field2_Name__c</fullName>
         <externalId>false</externalId>
-        <label>Insurance Company</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Blue Cross Blue Shield</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Medicare</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
+        <label>Lab Details Field2 Name</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackTrending>false</trackTrending>
-        <type>Picklist</type>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Lab_Details_Field3_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Lab Details Field3 Name</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
     </fields>
     <fields>
         <fullName>Lab_New_Field_1__c</fullName>
@@ -382,6 +422,33 @@
         <type>TextArea</type>
     </fields>
     <fields>
+        <fullName>Payment_Details_Field1_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment Details Field1 Name</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Details_Field2_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment Details Field2 Name</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Details_Field3_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment Details Field3 Name</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Payment__c</fullName>
         <externalId>false</externalId>
         <label>Payment</label>
@@ -391,6 +458,33 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payor_Details_Field1_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Payor Details Field1 Name</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Payor_Details_Field2_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Payor Details Field2 Name</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Payor_Details_Field3_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Payor Details Field3 Name</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
     </fields>
     <fields>
         <fullName>Payor_Details_New_Field_1__c</fullName>
@@ -433,6 +527,33 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Pharmacy_Details_Field1_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Pharmacy Details Field1 Name</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Pharmacy_Details_Field2_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Pharmacy Details Field2 Name</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Pharmacy_Details_Field3_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Pharmacy Details Field3 Name</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
     </fields>
     <fields>
         <fullName>Pharmacy_New_Field_1__c</fullName>
@@ -488,6 +609,20 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Practice__c</fullName>
+        <externalId>false</externalId>
+        <label>Practice</label>
+        <referenceTo>Practice__c</referenceTo>
+        <relationshipLabel>Rules</relationshipLabel>
+        <relationshipName>Rules</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
     <fields>
         <fullName>PreAuth_PreApproval_Diagnostics__c</fullName>
@@ -553,6 +688,33 @@
         <type>TextArea</type>
     </fields>
     <fields>
+        <fullName>Prior_Details_Field1_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Prior Details Field1 Name</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Prior_Details_Field2_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Prior Details Field2 Name</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Prior_Details_Field3_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Prior Details Field3 Name</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>RAD_ONC__c</fullName>
         <externalId>false</externalId>
         <label>RAD ONC</label>
@@ -587,16 +749,6 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Rule__c</fullName>
-        <externalId>false</externalId>
-        <label>Rule</label>
-        <length>32768</length>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackTrending>false</trackTrending>
-        <type>LongTextArea</type>
-        <visibleLines>3</visibleLines>
-    </fields>
-    <fields>
         <fullName>Termination_W_O_Cause__c</fullName>
         <externalId>false</externalId>
         <label>Termination W/O Cause</label>
@@ -615,5 +767,5 @@
     </nameField>
     <pluralLabel>Rules</pluralLabel>
     <searchLayouts/>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>ControlledByParent</sharingModel>
 </CustomObject>

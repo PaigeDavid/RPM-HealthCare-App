@@ -1,8 +1,12 @@
 public class RPM_exportrulesController {
     public List<RuleFull__c> allRules{get;set;}
+    List<Practice__c> practices;
     public String myDate { get; set; }
     public Boolean notValidDate {get;set;}
+    public Boolean displayPopup{get;set;}
     public String fileName{get;set;}
+    public String selectedParent{get;set;}
+    Integer parentIndex;
     //Input Fields
     public String nameOfPayor{get;set;}
     public String payorProducts{get;set;}
@@ -28,12 +32,19 @@ public class RPM_exportrulesController {
     public String flowCytometry{get;set;}
     public String comments{get;set;}
     public List<String> payorDetailInput{get;set;}
+    public List<String> payorDetailName{get;set;}
     public List<String> claimDeadlineInput{get;set;}
+    public List<String> claimDetailName{get;set;}
     public List<String> priorAuthInput{get;set;}
+    public List<String> priorDetailName{get;set;}
     public List<String> labDetailInput{get;set;}
+    public List<String> labDetailName{get;set;}
     public List<String> payBasisInput{get;set;}
+    public List<String> payDetailName{get;set;}
     public List<String> feeScheduleInput{get;set;}
+    public List<String> feeDetailName{get;set;}
     public List<String> pharmacyInput{get;set;}
+    public List<String> pharmacyDetailName{get;set;}
     //Pagination
     private integer counter = 0; //keep track of offset
     private integer list_size=1;
@@ -54,14 +65,25 @@ public class RPM_exportrulesController {
     public String selectedField{get;set;}
     
     public RPM_exportRulesController() {
+        selectedParent = ApexPages.currentPage().getParameters().get('selectedParent');
+        if(String.isBlank(selectedParent))
+            selectedParent='0';
         notValidDate = false;
+        displayPopup = false;
         payorDetailInput = new List<String>(3);
+        payorDetailName = new List<String>(3);
         claimDeadlineInput = new List<String>(3);
+        claimDetailName = new List<String>(3);
         priorAuthInput = new List<String>(3);
+        priorDetailName = new List<String>(3);
         labDetailInput = new List<String>(3);
+        labDetailName = new List<String>(3);
         payBasisInput = new List<String>(3);
+        payDetailName = new List<String>(3);
         feeScheduleInput = new List<String>(3);
+        feeDetailName = new List<String>(3);
         pharmacyInput = new List<String>(3);
+        pharmacyDetailName = new List<String>(3);
         filters = false;
         searchRules = false;
         selectedField = 'Name_Of_Payor__c';
@@ -76,21 +98,31 @@ public class RPM_exportrulesController {
         filterParam = '1111111';
         searchCriteria = '';
         fileName='';
+        practices = new List<Practice__c>();
+        practices = [Select Name From Practice__c Order By Name];
+        parentIndex = Integer.valueOf(selectedParent);
         allRules = [SELECT Effective_Date__c, Name_Of_Payor__c, Payor_Products__c, FSC__c, PlanType__c,
                     Initial_Claim_Filing_Limit__c, Payment__c, Claim_Appeal_Filing_Limit__c,
                     Referrals_Needed__c, Precertification_Authorization__c, PreAuth_PreApproval_Radiation__c,
                     PreAuth_PreApproval_Diagnostics__c, Lab_in_Office__c, Name_of_Reference_Lab__c, Advanced_Practice_Providers__c,
                     Required_to_Bill__c, APP_Reimbursement__c, MED_ONC_UROL__c, RAD_ONC__c,
                     DRUGS__c, Termination_W_O_Cause__c, In_House_Pharmacy__c, Flow_Cytometry__c, Comments__c,
-                    Payor_Details_New_Field_1__c, Payor_Details_New_Field_2__c, Payor_Details_New_Field_3__c,
-                    Claim_Deadlines_New_Field_1__c, Claim_Deadlines_New_Field_2__c, Claim_Deadlines_New_Field_3__c,
-                    Prior_Authorizations_New_Field_1__c, Prior_Authorizations_New_Field_2__c ,Prior_Authorizations_New_Field_3__c,
-                    Lab_New_Field_1__c, Lab_New_Field_2__c, Lab_New_Field_3__c,
-                    Payment_Basis_New_Field_1__c, Payment_Basis_New_Field_2__c, Payment_Basis_New_Field_3__c, 
-                    Fee_Schedule_New_Field_1__c, Fee_Schedule_New_Field_2__c, Fee_Schedule_New_Field_3__c,
-                    Pharmacy_New_Field_1__c, Pharmacy_New_Field_2__c, Pharmacy_New_Field_3__c 
-                    FROM RuleFull__c Order By Name_Of_Payor__c];
-        total_size = [Select count() FROM RuleFull__c];
+                    Payor_Details_New_Field_1__c, Payor_Details_Field1_Name__c, Payor_Details_New_Field_2__c, 
+                    Payor_Details_Field2_Name__c,Payor_Details_New_Field_3__c, Payor_Details_Field3_Name__c,
+                    Claim_Deadlines_New_Field_1__c, Claim_Details_Field1_Name__c, Claim_Deadlines_New_Field_2__c, 
+                    Claim_Details_Field2_Name__c, Claim_Deadlines_New_Field_3__c, Claim_Details_Field3_Name__c,
+                    Prior_Authorizations_New_Field_1__c, Prior_Details_Field1_Name__c, Prior_Authorizations_New_Field_2__c,
+                    Prior_Details_Field2_Name__c, Prior_Authorizations_New_Field_3__c, Prior_Details_Field3_Name__c,
+                    Lab_New_Field_1__c, Lab_Details_Field1_Name__c, Lab_New_Field_2__c, 
+                    Lab_Details_Field2_Name__c, Lab_New_Field_3__c, Lab_Details_Field3_Name__c, 
+                    Payment_Basis_New_Field_1__c, Payment_Details_Field1_Name__c, Payment_Basis_New_Field_2__c, 
+                    Payment_Details_Field2_Name__c, Payment_Basis_New_Field_3__c, Payment_Details_Field3_Name__c,
+                    Fee_Schedule_New_Field_1__c, Fee_Details_Field1_Name__c, Fee_Schedule_New_Field_2__c, 
+                    Fee_Details_Field2_Name__c, Fee_Schedule_New_Field_3__c, Fee_Details_Field3_Name__c,
+                    Pharmacy_New_Field_1__c, Pharmacy_Details_Field1_Name__c, Pharmacy_New_Field_2__c, 
+                    Pharmacy_Details_Field2_Name__c, Pharmacy_New_Field_3__c, Pharmacy_Details_Field3_Name__c
+                    FROM RuleFull__c WHERE Practice__c = :practices.get(parentIndex).Id Order By Name_Of_Payor__c];
+        total_size = [Select count() FROM RuleFull__c WHERE  Practice__c = :practices.get(parentIndex).Id];
         if(total_size > 0)
         	viewData(0);
         else 
@@ -154,24 +186,45 @@ public class RPM_exportrulesController {
         payorDetailInput.set(0, allRules.get(index).Payor_Details_New_Field_1__c);
         payorDetailInput.set(1, allRules.get(index).Payor_Details_New_Field_2__c);
         payorDetailInput.set(2, allRules.get(index).Payor_Details_New_Field_3__c);
+        payorDetailName.set(0, allRules.get(index).Payor_Details_Field1_Name__c);
+        payorDetailName.set(1, allRules.get(index).Payor_Details_Field2_Name__c);
+        payorDetailName.set(2, allRules.get(index).Payor_Details_Field3_Name__c);
     	claimDeadlineInput.set(0, allRules.get(index).Claim_Deadlines_New_Field_1__c);
         claimDeadlineInput.set(1, allRules.get(index).Claim_Deadlines_New_Field_2__c);
         claimDeadlineInput.set(2, allRules.get(index).Claim_Deadlines_New_Field_3__c);
+        claimDetailName.set(0, allRules.get(index).Claim_Details_Field1_Name__c);
+        claimDetailName.set(1, allRules.get(index).Claim_Details_Field2_Name__c);
+        claimDetailName.set(2, allRules.get(index).Claim_Details_Field3_Name__c);
         priorAuthInput.set(0, allRules.get(index).Prior_Authorizations_New_Field_1__c);
         priorAuthInput.set(1, allRules.get(index).Prior_Authorizations_New_Field_2__c);
         priorAuthInput.set(2, allRules.get(index).Prior_Authorizations_New_Field_3__c);
+        priorDetailName.set(0, allRules.get(index).Prior_Details_Field1_Name__c);
+        priorDetailName.set(1, allRules.get(index).Prior_Details_Field2_Name__c);
+        priorDetailName.set(2, allRules.get(index).Prior_Details_Field3_Name__c);
     	labDetailInput.set(0, allRules.get(index).Lab_New_Field_1__c);
     	labDetailInput.set(1, allRules.get(index).Lab_New_Field_2__c);
     	labDetailInput.set(2, allRules.get(index).Lab_New_Field_3__c);
+        labDetailName.set(0, allRules.get(index).Lab_Details_Field1_Name__c);
+        labDetailName.set(1, allRules.get(index).Lab_Details_Field2_Name__c);
+        labDetailName.set(2, allRules.get(index).Lab_Details_Field3_Name__c);
     	payBasisInput.set(0, allRules.get(index).Payment_Basis_New_Field_1__c);
         payBasisInput.set(1, allRules.get(index).Payment_Basis_New_Field_2__c);
         payBasisInput.set(2, allRules.get(index).Payment_Basis_New_Field_3__c);
+        payDetailName.set(0, allRules.get(index).Payment_Details_Field1_Name__c);
+        payDetailName.set(1, allRules.get(index).Payment_Details_Field2_Name__c);
+        payDetailName.set(2, allRules.get(index).Payment_Details_Field3_Name__c);
     	feeScheduleInput.set(0, allRules.get(index).Fee_Schedule_New_Field_1__c);
         feeScheduleInput.set(1, allRules.get(index).Fee_Schedule_New_Field_2__c);
         feeScheduleInput.set(2, allRules.get(index).Fee_Schedule_New_Field_3__c);
+        feeDetailName.set(0, allRules.get(index).Fee_Details_Field1_Name__c);
+        feeDetailName.set(1, allRules.get(index).Fee_Details_Field2_Name__c);
+        feeDetailName.set(2, allRules.get(index).Fee_Details_Field3_Name__c);
     	pharmacyInput.set(0, allRules.get(index).Pharmacy_New_Field_1__c);
         pharmacyInput.set(1, allRules.get(index).Pharmacy_New_Field_2__c);
         pharmacyInput.set(2, allRules.get(index).Pharmacy_New_Field_3__c);
+        pharmacyDetailName.set(0, allRules.get(index).Pharmacy_Details_Field1_Name__c);
+        pharmacyDetailName.set(1, allRules.get(index).Pharmacy_Details_Field2_Name__c);
+        pharmacyDetailName.set(2, allRules.get(index).Pharmacy_Details_Field3_Name__c);
         
         return null;
     }
@@ -213,28 +266,6 @@ public class RPM_exportrulesController {
         return null;
     }
     
-    public PageReference exportRules() {
-        if(payorDetailFilter) { filterParam = '1' + filterParam.substring(1,7); }
-        else { filterParam = '0' + filterParam.substring(1,7); }
-        if(claimDetailFilter) { filterParam = filterParam.substring(0,1) + '1' + filterParam.substring(2,7); }
-        else { filterParam = filterParam.substring(0,1) + '0' + filterParam.substring(2,7); }
-        if(priorDetailFilter) { filterParam = filterParam.substring(0,2) + '1' + filterParam.substring(3,7); }
-        else { filterParam = filterParam.substring(0,2) + '0' + filterParam.substring(3,7); }
-        if(labDetailFilter) { filterParam = filterParam.substring(0,3) + '1' + filterParam.substring(4,7); }
-        else { filterParam = filterParam.substring(0,3) + '0' + filterParam.substring(4,7); }
-        if(paymentDetailFilter) { filterParam = filterParam.substring(0,4) + '1' + filterParam.substring(5,7); }
-        else { filterParam = filterParam.substring(0,4) + '0' + filterParam.substring(5,7); }
-        if(feeDetailFilter) { filterParam = filterParam.substring(0,5) + '1' + filterParam.substring(6,7); }
-        else { filterParam = filterParam.substring(0,5) + '0' + filterParam.substring(6,7); }
-        if(pharmacyDetailFilter) { filterParam = filterParam.substring(0,6) + '1'; }
-        else { filterParam = filterParam.substring(0,6) + '0'; }
-        
-        String url = '/apex/RPM_ExportedToExcel?fileName=' + fileName + '&filters=' + filterParam + '&search=' + selectedField + '&criteria=' + searchCriteria;
-        PageReference pageRef = new PageReference(url);
-        pageRef.setRedirect(true);
-        return pageRef;
-    }
-    
     public void updateRules() {
         try {
             allRules.get(counter).Effective_Date__c = date.parse(myDate);
@@ -269,7 +300,6 @@ public class RPM_exportrulesController {
         allRules.get(counter).In_House_Pharmacy__c = inHousePharmacy;
         allRules.get(counter).Flow_Cytometry__c = flowCytometry;
         allRules.get(counter).Comments__c = comments;
-        
         allRules.get(counter).Payor_Details_New_Field_1__c = payorDetailInput.get(0);
         allRules.get(counter).Payor_Details_New_Field_2__c = payorDetailInput.get(1);
         allRules.get(counter).Payor_Details_New_Field_3__c = payorDetailInput.get(2);
@@ -368,20 +398,28 @@ public class RPM_exportrulesController {
     }
     
     public PageReference clearSearch() {
+        searchCriteria = '';
         allRules = [SELECT Effective_Date__c, Name_Of_Payor__c, Payor_Products__c, FSC__c, PlanType__c,
                     Initial_Claim_Filing_Limit__c, Payment__c, Claim_Appeal_Filing_Limit__c,
                     Referrals_Needed__c, Precertification_Authorization__c, PreAuth_PreApproval_Radiation__c,
                     PreAuth_PreApproval_Diagnostics__c, Lab_in_Office__c, Name_of_Reference_Lab__c, Advanced_Practice_Providers__c,
                     Required_to_Bill__c, APP_Reimbursement__c, MED_ONC_UROL__c, RAD_ONC__c,
                     DRUGS__c, Termination_W_O_Cause__c, In_House_Pharmacy__c, Flow_Cytometry__c, Comments__c,
-                    Payor_Details_New_Field_1__c, Payor_Details_New_Field_2__c, Payor_Details_New_Field_3__c,
-                    Claim_Deadlines_New_Field_1__c, Claim_Deadlines_New_Field_2__c, Claim_Deadlines_New_Field_3__c,
-                    Prior_Authorizations_New_Field_1__c, Prior_Authorizations_New_Field_2__c ,Prior_Authorizations_New_Field_3__c,
-                    Lab_New_Field_1__c, Lab_New_Field_2__c, Lab_New_Field_3__c,
-                    Payment_Basis_New_Field_1__c, Payment_Basis_New_Field_2__c, Payment_Basis_New_Field_3__c, 
-                    Fee_Schedule_New_Field_1__c, Fee_Schedule_New_Field_2__c, Fee_Schedule_New_Field_3__c,
-                    Pharmacy_New_Field_1__c, Pharmacy_New_Field_2__c, Pharmacy_New_Field_3__c 
-                    FROM RuleFull__c Order By Name_Of_Payor__c];
+                    Payor_Details_New_Field_1__c, Payor_Details_Field1_Name__c, Payor_Details_New_Field_2__c, 
+                    Payor_Details_Field2_Name__c,Payor_Details_New_Field_3__c, Payor_Details_Field3_Name__c,
+                    Claim_Deadlines_New_Field_1__c, Claim_Details_Field1_Name__c, Claim_Deadlines_New_Field_2__c, 
+                    Claim_Details_Field2_Name__c, Claim_Deadlines_New_Field_3__c, Claim_Details_Field3_Name__c,
+                    Prior_Authorizations_New_Field_1__c, Prior_Details_Field1_Name__c, Prior_Authorizations_New_Field_2__c,
+                    Prior_Details_Field2_Name__c, Prior_Authorizations_New_Field_3__c, Prior_Details_Field3_Name__c,
+                    Lab_New_Field_1__c, Lab_Details_Field1_Name__c, Lab_New_Field_2__c, 
+                    Lab_Details_Field2_Name__c, Lab_New_Field_3__c, Lab_Details_Field3_Name__c, 
+                    Payment_Basis_New_Field_1__c, Payment_Details_Field1_Name__c, Payment_Basis_New_Field_2__c, 
+                    Payment_Details_Field2_Name__c, Payment_Basis_New_Field_3__c, Payment_Details_Field3_Name__c,
+                    Fee_Schedule_New_Field_1__c, Fee_Details_Field1_Name__c, Fee_Schedule_New_Field_2__c, 
+                    Fee_Details_Field2_Name__c, Fee_Schedule_New_Field_3__c, Fee_Details_Field3_Name__c,
+                    Pharmacy_New_Field_1__c, Pharmacy_Details_Field1_Name__c, Pharmacy_New_Field_2__c, 
+                    Pharmacy_Details_Field2_Name__c,Pharmacy_New_Field_3__c, Pharmacy_Details_Field3_Name__c
+                    FROM RuleFull__c WHERE Practice__c = :practices.get(parentIndex).Id Order By Name_Of_Payor__c];
         total_size = [Select count() FROM RuleFull__c];
         if(total_size > 0)
         	viewData(0);
@@ -392,21 +430,33 @@ public class RPM_exportrulesController {
     }
     
     public PageReference viewSearchedRules() {
-        String tempInput = '\'%' + String.escapeSingleQuotes(searchCriteria.trim()) + '%\'';
+        String tempInputParent = '\'' + String.escapeSingleQuotes(practices.get(parentIndex).Id) + '\'';
+        String tempSelectedField = '\'' + String.escapeSingleQuotes(selectedField.trim()) + '\'';
+        String tempInputField = '\'%' + String.escapeSingleQuotes(searchCriteria.trim()) + '%\'';
+        
+        
+        
         String SOQLQuery = 'SELECT Effective_Date__c, Name_Of_Payor__c, Payor_Products__c, FSC__c, PlanType__c, ' +
                     'Initial_Claim_Filing_Limit__c, Payment__c, Claim_Appeal_Filing_Limit__c, ' +
                     'Referrals_Needed__c, Precertification_Authorization__c, PreAuth_PreApproval_Radiation__c, ' +
                     'PreAuth_PreApproval_Diagnostics__c, Lab_in_Office__c, Name_of_Reference_Lab__c, Advanced_Practice_Providers__c, ' +
                     'Required_to_Bill__c, APP_Reimbursement__c, MED_ONC_UROL__c, RAD_ONC__c, ' +
                     'DRUGS__c, Termination_W_O_Cause__c, In_House_Pharmacy__c, Flow_Cytometry__c, Comments__c, ' +
-                    'Payor_Details_New_Field_1__c, Payor_Details_New_Field_2__c, Payor_Details_New_Field_3__c, ' +
-                    'Claim_Deadlines_New_Field_1__c, Claim_Deadlines_New_Field_2__c, Claim_Deadlines_New_Field_3__c, ' +
-                    'Prior_Authorizations_New_Field_1__c, Prior_Authorizations_New_Field_2__c ,Prior_Authorizations_New_Field_3__c, ' +
-                    'Lab_New_Field_1__c, Lab_New_Field_2__c, Lab_New_Field_3__c, ' +
-                    'Payment_Basis_New_Field_1__c, Payment_Basis_New_Field_2__c, Payment_Basis_New_Field_3__c, ' +
-                    'Fee_Schedule_New_Field_1__c, Fee_Schedule_New_Field_2__c, Fee_Schedule_New_Field_3__c, ' +
-                    'Pharmacy_New_Field_1__c, Pharmacy_New_Field_2__c, Pharmacy_New_Field_3__c ' +
-                    'FROM RuleFull__c WHERE ' + selectedField + ' LIKE ' + tempInput + ' Order By Name_Of_Payor__c';
+                    'Payor_Details_New_Field_1__c, Payor_Details_Field1_Name__c, Payor_Details_New_Field_2__c, ' +
+                    'Payor_Details_Field2_Name__c,Payor_Details_New_Field_3__c, Payor_Details_Field3_Name__c, ' +
+                    'Claim_Deadlines_New_Field_1__c, Claim_Details_Field1_Name__c, Claim_Deadlines_New_Field_2__c, ' +
+                    'Claim_Details_Field2_Name__c, Claim_Deadlines_New_Field_3__c, Claim_Details_Field3_Name__c, ' +
+                    'Prior_Authorizations_New_Field_1__c, Prior_Details_Field1_Name__c, Prior_Authorizations_New_Field_2__c, ' +
+                    'Prior_Details_Field2_Name__c, Prior_Authorizations_New_Field_3__c, Prior_Details_Field3_Name__c, ' +
+                    'Lab_New_Field_1__c, Lab_Details_Field1_Name__c, Lab_New_Field_2__c, ' +
+                    'Lab_Details_Field2_Name__c, Lab_New_Field_3__c, Lab_Details_Field3_Name__c,  ' +
+                    'Payment_Basis_New_Field_1__c, Payment_Details_Field1_Name__c, Payment_Basis_New_Field_2__c, ' +
+                    'Payment_Details_Field2_Name__c, Payment_Basis_New_Field_3__c, Payment_Details_Field3_Name__c, ' +
+                    'Fee_Schedule_New_Field_1__c, Fee_Details_Field1_Name__c, Fee_Schedule_New_Field_2__c, ' +
+                    'Fee_Details_Field2_Name__c, Fee_Schedule_New_Field_3__c, Fee_Details_Field3_Name__c, ' +
+                    'Pharmacy_New_Field_1__c, Pharmacy_Details_Field1_Name__c, Pharmacy_New_Field_2__c, ' +
+                    'Pharmacy_Details_Field2_Name__c, Pharmacy_New_Field_3__c, Pharmacy_Details_Field3_Name__c ' +
+                    'FROM RuleFull__c WHERE Practice__c = ' + tempInputParent + ' AND ' + selectedField + ' LIKE ' + tempInputField + ' Order By Name_Of_Payor__c';
         
         allRules = database.query(SOQLQuery);
         total_size = allRules.size();
@@ -419,11 +469,47 @@ public class RPM_exportrulesController {
         
         return null;
     }
+    
+    public void openPopup() {
+        displayPopup = true;
+    }
+    
+    public void closePopup() {
+        displayPopup = false;
+    }
+    
+    //Links to other pages
+    public PageReference exportRules() {
+        if(payorDetailFilter) { filterParam = '1' + filterParam.substring(1,7); }
+        else { filterParam = '0' + filterParam.substring(1,7); }
+        if(claimDetailFilter) { filterParam = filterParam.substring(0,1) + '1' + filterParam.substring(2,7); }
+        else { filterParam = filterParam.substring(0,1) + '0' + filterParam.substring(2,7); }
+        if(priorDetailFilter) { filterParam = filterParam.substring(0,2) + '1' + filterParam.substring(3,7); }
+        else { filterParam = filterParam.substring(0,2) + '0' + filterParam.substring(3,7); }
+        if(labDetailFilter) { filterParam = filterParam.substring(0,3) + '1' + filterParam.substring(4,7); }
+        else { filterParam = filterParam.substring(0,3) + '0' + filterParam.substring(4,7); }
+        if(paymentDetailFilter) { filterParam = filterParam.substring(0,4) + '1' + filterParam.substring(5,7); }
+        else { filterParam = filterParam.substring(0,4) + '0' + filterParam.substring(5,7); }
+        if(feeDetailFilter) { filterParam = filterParam.substring(0,5) + '1' + filterParam.substring(6,7); }
+        else { filterParam = filterParam.substring(0,5) + '0' + filterParam.substring(6,7); }
+        if(pharmacyDetailFilter) { filterParam = filterParam.substring(0,6) + '1'; }
+        else { filterParam = filterParam.substring(0,6) + '0'; }
+        
+        /*String url = '/apex/RPM_exportingContent?filters=' + filterParam + '&search=' + 
+            				selectedField + '&criteria=' + searchCriteria + '&selectedParent=' + selectedParent;
+        PageReference pageRef = new PageReference(url);
+        pageRef.setRedirect(true);
+        return pageRef;
+		*/
+        openPopup();
+        return null;
+    }
 
 	public PageReference gotoAdminToolkit() {
-       PageReference pr = Page.RPM_AdminTools;
-       pr.setRedirect(true);
-       return pr;
+        String url = '/apex/RPM_AdminTools?selectedParent=' + selectedParent;
+        PageReference pageRef = new PageReference(url);
+        pageRef.setRedirect(true);
+        return pageRef;
     }  
     
     public PageReference gotoHome() {

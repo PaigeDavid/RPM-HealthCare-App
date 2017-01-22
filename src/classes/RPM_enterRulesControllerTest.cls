@@ -1,14 +1,15 @@
 @isTest
 public class RPM_enterRulesControllerTest {
-    static RPM_enterrulesController controller = new RPM_enterrulesController();
 
     @isTest static void testEnableSubmit() {
+        RPM_enterrulesController controller = new RPM_enterrulesController();
         controller.buttonEnable = true;
         controller.enableSubmit();
         System.assertEquals(false, controller.buttonEnable);
     }
     
     @isTest static void testAddNewDetailAndLoseField() {
+        RPM_enterrulesController controller = new RPM_enterrulesController();
         //addNewDetail()
         controller.newFieldDetail = 'Payor Details';
         controller.newFieldName = 'test1';
@@ -63,15 +64,18 @@ public class RPM_enterRulesControllerTest {
     }
     
     @isTest static void testPageReferences() {
+        RPM_enterrulesController controller = new RPM_enterrulesController();
         controller.gotoAdminToolkit();
         controller.showPopup();
     }
     
     @isTest static void testGoToHome() {
+        RPM_enterrulesController controller = new RPM_enterrulesController();
         controller.gotoHome();
     }
     
     @isTest static void testClearFields() {
+        RPM_enterrulesController controller = new RPM_enterrulesController();
         controller.newFieldDetail = 'Payor Details';
         controller.newFieldName = 'test1';
         controller.addNewDetail();
@@ -128,6 +132,13 @@ public class RPM_enterRulesControllerTest {
     }
     
     @isTest static void testSubmitRule() {
+        Practice__c practice = new Practice__c();
+        practice.Name = 'PracticeTest';
+        insert practice;
+        
+        RPM_enterrulesController controller = new RPM_enterrulesController();
+        controller.selectedParent = '0';
+        
         controller.myDate = date.parse('12/16/16');
         controller.nameOfPayor = 'test';
         

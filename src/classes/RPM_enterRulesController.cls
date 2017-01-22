@@ -18,6 +18,7 @@ public class RPM_enterRulesController {
     public Date myDate { get; set; }
     public Boolean buttonEnable{get;set;}
     public boolean displayPopup{get; set;}
+    public String selectedParent{get;set;}
     //Input Fields
     public String nameOfPayor{get;set;}
     public String payorProducts{get;set;}
@@ -47,12 +48,14 @@ public class RPM_enterRulesController {
     public Blob contentFile{get;set;}
     String[] filelines = new String[]{};
     List<RuleFull__c> rulesUpload;
+    List<Practice__c> practices;
     public String exceptionMessageUpload{get;set;}
     public String exceptionMessageInsert{get;set;}
     public Boolean exceptionUpload{get;set;}
     public Boolean exceptionInsert{get;set;}
     
     public RPM_enterRulesController() {
+        selectedParent = ApexPages.currentPage().getParameters().get('selectedParent');
         newPayorDetail = new List<String>();
         payorDetailInput = new List<String>(3);
         newClaimDeadline = new List<String>();
@@ -181,6 +184,7 @@ public class RPM_enterRulesController {
     
     //Import
     public PageReference ReadFile() {
+        Integer parentIndex;
         try {
             //Convert the uploaded file which in is BLOB format into a string
 			//nameFile = blobToString( contentFile, 'ISO-8859-1');   
@@ -191,6 +195,9 @@ public class RPM_enterRulesController {
 
             //Iterate through every line and create a New Rule for each row
             rulesUpload = new List<RuleFull__c>();
+			practices = new List<Practice__c>();
+			practices = [Select Name From Practice__c Order By Name];
+            parentIndex = Integer.valueOf(selectedParent);
             
             for(Integer i=4;i<filelines.size();i++) {
                 String[] inputValues = new String[]{};
@@ -221,6 +228,7 @@ public class RPM_enterRulesController {
                     }
                 }
                 
+                r.Practice__c = practices.get(parentIndex).Id;
                 r.Name = inputValues[0] + ' Rule';
                 r.Effective_Date__c = myDate;
                 r.Name_Of_Payor__c = inputValues[0];
@@ -295,13 +303,16 @@ public class RPM_enterRulesController {
     public void submitRule() {
         //Create new rule, if dates match, add logic to update existing rule
         RuleFull__c newRule = new RuleFull__c();
-        
-        //Name of rule, is required, temp logic
-        //TODO: Fix this logic so the naming convention fits with what is wanted
+        Integer parentIndex;
+        practices = new List<Practice__c>();
+        practices = [Select Name From Practice__c Order By Name];
+        parentIndex = Integer.valueOf(selectedParent);
+
         Integer total_size = [Select count() from RuleFull__c];
-        newRule.Name = 'Rule' + (total_size+1); //This should be titled something specific
+        newRule.Name = nameOfPayor + ' Rule';
         
         //Insert fields from vfp
+        newRule.Practice__c = practices.get(parentIndex).Id;
         newRule.Effective_Date__c = myDate;
         newRule.Name_Of_Payor__c = nameOfPayor;
         newRule.Payor_Products__c = payorProducts;
@@ -326,48 +337,132 @@ public class RPM_enterRulesController {
         newRule.In_House_Pharmacy__c = inHousePharmacy;
         newRule.Flow_Cytometry__c = flowCytometry;
         newRule.Comments__c = comments;
-        if(newPayorDetail.size() > 0) 
+        if(newPayorDetail.size() > 0) {
+            //practices.get(parentIndex).Payor_Details_New_Field_1__c = payorDetailInput.get(0);
+            //practices.get(parentIndex).Payor_Details_Field1_Name__c = newPayorDetail.get(0);
             newRule.Payor_Details_New_Field_1__c = payorDetailInput.get(0);
-        if(newPayorDetail.size() > 1) 
+            newRule.Payor_Details_Field1_Name__c = newPayorDetail.get(0);
+        }
+        if(newPayorDetail.size() > 1) {
+            //practices.get(parentIndex).Payor_Details_New_Field_2__c = payorDetailInput.get(1);
+            //practices.get(parentIndex).Payor_Details_Field2_Name__c = newPayorDetail.get(1);
             newRule.Payor_Details_New_Field_2__c = payorDetailInput.get(1);
-        if(newPayorDetail.size() > 2) 
+            newRule.Payor_Details_Field2_Name__c = newPayorDetail.get(1);
+        }
+        if(newPayorDetail.size() > 2) {
+            //practices.get(parentIndex).Payor_Details_New_Field_3__c = payorDetailInput.get(2);
+            //practices.get(parentIndex).Payor_Details_Field3_Name__c = newPayorDetail.get(2);
             newRule.Payor_Details_New_Field_3__c = payorDetailInput.get(2);
-        if(newClaimDeadline.size() > 0) 
+            newRule.Payor_Details_Field3_Name__c = newPayorDetail.get(2);
+        }
+        if(newClaimDeadline.size() > 0) {
+            //practices.get(parentIndex).Claim_Deadlines_New_Field_1__c = claimDeadlineInput.get(0);
+            //practices.get(parentIndex).Claim_Details_Field1_Name__c = newClaimDeadline.get(0);
             newRule.Claim_Deadlines_New_Field_1__c = claimDeadlineInput.get(0);
-        if(newClaimDeadline.size() > 1) 
+            newRule.Claim_Details_Field1_Name__c = newClaimDeadline.get(0);
+        }
+        if(newClaimDeadline.size() > 1) {
+            //practices.get(parentIndex).Claim_Deadlines_New_Field_2__c = claimDeadlineInput.get(1);
+            //practices.get(parentIndex).Claim_Details_Field2_Name__c = newClaimDeadline.get(1);
             newRule.Claim_Deadlines_New_Field_2__c = claimDeadlineInput.get(1);
-        if(newClaimDeadline.size() > 2) 
+            newRule.Claim_Details_Field2_Name__c = newClaimDeadline.get(1);
+        }
+        if(newClaimDeadline.size() > 2) {
+            //practices.get(parentIndex).Claim_Deadlines_New_Field_3__c = claimDeadlineInput.get(2);
+            //practices.get(parentIndex).Claim_Details_Field3_Name__c = newClaimDeadline.get(2);
             newRule.Claim_Deadlines_New_Field_3__c = claimDeadlineInput.get(2);
-        if(priorAuth.size() > 0) 
+            newRule.Claim_Details_Field3_Name__c = newClaimDeadline.get(2);
+        }
+        if(priorAuth.size() > 0) {
+            //practices.get(parentIndex).Prior_Authorizations_New_Field_1__c = priorAuthInput.get(0);
+            //practices.get(parentIndex).Prior_Details_Field1_Name__c = priorAuth.get(0);
             newRule.Prior_Authorizations_New_Field_1__c = priorAuthInput.get(0);
-        if(priorAuth.size() > 1) 
+            newRule.Prior_Details_Field1_Name__c = priorAuth.get(0);
+        }
+        if(priorAuth.size() > 1) {
+            //practices.get(parentIndex).Prior_Authorizations_New_Field_2__c = priorAuthInput.get(1);
+            //practices.get(parentIndex).Prior_Details_Field2_Name__c = priorAuth.get(1);
             newRule.Prior_Authorizations_New_Field_2__c = priorAuthInput.get(1);
-        if(priorAuth.size() > 2) 
+            newRule.Prior_Details_Field2_Name__c = priorAuth.get(1);
+        }
+        if(priorAuth.size() > 2) {
+            //practices.get(parentIndex).Prior_Authorizations_New_Field_3__c = priorAuthInput.get(2);
+            //practices.get(parentIndex).Prior_Details_Field3_Name__c = priorAuth.get(2);
             newRule.Prior_Authorizations_New_Field_3__c = priorAuthInput.get(2);
-        if(labDetail.size() > 0) 
+            newRule.Prior_Details_Field3_Name__c = priorAuth.get(2);
+        }
+        if(labDetail.size() > 0) {
+            //practices.get(parentIndex).Lab_New_Field_1__c = labDetailInput.get(0);
+            //practices.get(parentIndex).Lab_Details_Field1_Name__c = labDetail.get(0);
             newRule.Lab_New_Field_1__c = labDetailInput.get(0);
-        if(labDetail.size() > 1) 
+            newRule.Lab_Details_Field1_Name__c = labDetail.get(0);
+        }
+        if(labDetail.size() > 1) {
+            //practices.get(parentIndex).Lab_New_Field_2__c = labDetailInput.get(1);
+            //practices.get(parentIndex).Lab_Details_Field2_Name__c = labDetail.get(1);
             newRule.Lab_New_Field_2__c = labDetailInput.get(1);
-        if(labDetail.size() > 2) 
+            newRule.Lab_Details_Field2_Name__c = labDetail.get(1);
+        }
+        if(labDetail.size() > 2) {
+            //practices.get(parentIndex).Lab_New_Field_3__c = labDetailInput.get(2);
+            //practices.get(parentIndex).Lab_Details_Field3_Name__c = labDetail.get(2);
             newRule.Lab_New_Field_3__c = labDetailInput.get(2);
-        if(payBasis.size() > 0) 
+            newRule.Lab_Details_Field3_Name__c = labDetail.get(2);
+        }
+        if(payBasis.size() > 0) {
+            //practices.get(parentIndex).Payment_Basis_New_Field_1__c = payBasisInput.get(0);
+            //practices.get(parentIndex).Payment_Details_Field1_Name__c = payBasis.get(0);
             newRule.Payment_Basis_New_Field_1__c = payBasisInput.get(0);
-        if(payBasis.size() > 1) 
+            newRule.Payment_Details_Field1_Name__c = payBasis.get(0);
+        }
+        if(payBasis.size() > 1) {
+            //practices.get(parentIndex).Payment_Basis_New_Field_2__c = payBasisInput.get(1);
+            //practices.get(parentIndex).Payment_Details_Field2_Name__c = payBasis.get(1);
             newRule.Payment_Basis_New_Field_2__c = payBasisInput.get(1);
-        if(payBasis.size() > 2) 
+            newRule.Payment_Details_Field2_Name__c = payBasis.get(1);
+        }
+        if(payBasis.size() > 2) {
+            //practices.get(parentIndex).Payment_Basis_New_Field_3__c = payBasisInput.get(2);
+            //practices.get(parentIndex).Payment_Details_Field3_Name__c = payBasis.get(2);
             newRule.Payment_Basis_New_Field_3__c = payBasisInput.get(2);
-        if(feeSchedule.size() > 0) 
+            newRule.Payment_Details_Field3_Name__c = payBasis.get(2);
+        }
+        if(feeSchedule.size() > 0) {
+            //practices.get(parentIndex).Fee_Schedule_New_Field_1__c = feeScheduleInput.get(0);
+            //practices.get(parentIndex).Fee_Details_Field1_Name__c = feeSchedule.get(0);
             newRule.Fee_Schedule_New_Field_1__c = feeScheduleInput.get(0);
-        if(feeSchedule.size() > 1) 
+            newRule.Fee_Details_Field1_Name__c = feeSchedule.get(0);
+        }
+        if(feeSchedule.size() > 1) {
+            //practices.get(parentIndex).Fee_Schedule_New_Field_2__c = feeScheduleInput.get(1);
+            //practices.get(parentIndex).Fee_Details_Field2_Name__c = feeSchedule.get(1);
             newRule.Fee_Schedule_New_Field_2__c = feeScheduleInput.get(1);
-        if(feeSchedule.size() > 2) 
+            newRule.Fee_Details_Field2_Name__c = feeSchedule.get(1);
+        }
+        if(feeSchedule.size() > 2) {
+            //practices.get(parentIndex).Fee_Schedule_New_Field_3__c = feeScheduleInput.get(2);
+            //practices.get(parentIndex).Fee_Details_Field3_Name__c = feeSchedule.get(2);
             newRule.Fee_Schedule_New_Field_3__c = feeScheduleInput.get(2);
-        if(pharmacy.size() > 0) 
+            newRule.Fee_Details_Field3_Name__c = feeSchedule.get(2);
+        }
+        if(pharmacy.size() > 0) {
+            //practices.get(parentIndex).Pharmacy_New_Field_1__c = pharmacyInput.get(0);
+            //practices.get(parentIndex).Pharmacy_Details_Field1_Name__c = pharmacy.get(0);
             newRule.Pharmacy_New_Field_1__c = pharmacyInput.get(0);
-        if(pharmacy.size() > 1) 
+            newRule.Pharmacy_Details_Field1_Name__c = pharmacy.get(0);
+        }
+        if(pharmacy.size() > 1) {
+            //practices.get(parentIndex).Pharmacy_New_Field_2__c = pharmacyInput.get(1);
+            //practices.get(parentIndex).Pharmacy_Details_Field2_Name__c = pharmacy.get(1);
             newRule.Pharmacy_New_Field_2__c = pharmacyInput.get(1);
-        if(pharmacy.size() > 2) 
+            newRule.Pharmacy_Details_Field2_Name__c = pharmacy.get(1);
+        }
+        if(pharmacy.size() > 2) {
+            //practices.get(parentIndex).Pharmacy_New_Field_3__c = pharmacyInput.get(2);
+            //practices.get(parentIndex).Pharmacy_Details_Field3_Name__c = pharmacy.get(2);
             newRule.Pharmacy_New_Field_3__c = pharmacyInput.get(2);
+            newRule.Pharmacy_Details_Field3_Name__c = pharmacy.get(2);
+        }
         
         try {
           insert newRule;
@@ -379,9 +474,10 @@ public class RPM_enterRulesController {
     
     public PageReference gotoAdminToolkit()
     {
-       PageReference pr = Page.RPM_AdminTools;
-       pr.setRedirect(true);
-       return pr;
+        String url = '/apex/RPM_AdminTools?selectedParent=' + selectedParent;
+        PageReference pageRef = new PageReference(url);
+        pageRef.setRedirect(true);
+        return pageRef;
     }
     
     public PageReference gotoHome() {

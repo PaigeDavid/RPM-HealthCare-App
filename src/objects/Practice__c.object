@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>A practice has rules associated with it. Practice is the parent, rules are its children</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Claim_Deadlines_New_Field_1__c</fullName>
+        <externalId>false</externalId>
+        <label>Claim Deadlines New Field 1</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Claim_Deadlines_New_Field_2__c</fullName>
+        <externalId>false</externalId>
+        <label>Claim Deadlines New Field 2</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Claim_Deadlines_New_Field_3__c</fullName>
+        <externalId>false</externalId>
+        <label>Claim Deadlines New Field 3</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Claim_Details_Field1_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Claim Details Field1 Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Claim_Details_Field2_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Claim Details Field2 Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Claim_Details_Field3_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Claim Details Field3 Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Fee_Details_Field1_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Fee Details Field1 Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Fee_Details_Field2_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Fee Details Field2 Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Fee_Details_Field3_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Fee Details Field3 Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Fee_Schedule_New_Field_1__c</fullName>
+        <externalId>false</externalId>
+        <label>Fee Schedule New Field 1</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Fee_Schedule_New_Field_2__c</fullName>
+        <externalId>false</externalId>
+        <label>Fee Schedule New Field 2</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Fee_Schedule_New_Field_3__c</fullName>
+        <externalId>false</externalId>
+        <label>Fee Schedule New Field 3</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Lab_Details_Field1_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Lab Details Field1 Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Lab_Details_Field2_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Lab Details Field2 Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Lab_Details_Field3_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Lab Details Field3 Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Lab_New_Field_1__c</fullName>
+        <externalId>false</externalId>
+        <label>Lab New Field 1</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Lab_New_Field_2__c</fullName>
+        <externalId>false</externalId>
+        <label>Lab New Field 2</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Lab_New_Field_3__c</fullName>
+        <externalId>false</externalId>
+        <label>Lab New Field 3</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Basis_New_Field_1__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment Basis New Field 1</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Basis_New_Field_2__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment Basis New Field 2</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Basis_New_Field_3__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment Basis New Field 3</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Details_Field1_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment Details Field1 Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Details_Field2_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment Details Field2 Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Details_Field3_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment Details Field3 Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Payor_Details_Field1_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Payor Details Field1 Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Payor_Details_Field2_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Payor Details Field2 Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Payor_Details_Field3_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Payor Details Field3 Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Payor_Details_New_Field_1__c</fullName>
+        <externalId>false</externalId>
+        <label>Payor Details New Field 1</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Payor_Details_New_Field_2__c</fullName>
+        <externalId>false</externalId>
+        <label>Payor Details New Field 2</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Payor_Details_New_Field_3__c</fullName>
+        <externalId>false</externalId>
+        <label>Payor Details New Field 3</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Pharmacy_Details_Field1_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Pharmacy Details Field1 Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Pharmacy_Details_Field2_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Pharmacy Details Field2 Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Pharmacy_Details_Field3_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Pharmacy Details Field3 Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Pharmacy_New_Field_1__c</fullName>
+        <externalId>false</externalId>
+        <label>Pharmacy New Field 1</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Pharmacy_New_Field_2__c</fullName>
+        <externalId>false</externalId>
+        <label>Pharmacy New Field 2</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Pharmacy_New_Field_3__c</fullName>
+        <externalId>false</externalId>
+        <label>Pharmacy New Field 3</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Prior_Authorizations_New_Field_1__c</fullName>
+        <externalId>false</externalId>
+        <label>Prior Authorizations New Field 1</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Prior_Authorizations_New_Field_2__c</fullName>
+        <externalId>false</externalId>
+        <label>Prior Authorizations New Field 2</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Prior_Authorizations_New_Field_3__c</fullName>
+        <externalId>false</externalId>
+        <label>Prior Authorizations New Field 3</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Prior_Details_Field1_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Prior Details Field1 Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Prior_Details_Field2_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Prior Details Field2 Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Prior_Details_Field3_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Prior Details Field3 Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <label>Practice</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Practice Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Practices</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

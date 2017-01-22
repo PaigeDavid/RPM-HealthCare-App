@@ -1,13 +1,21 @@
 @isTest
 public class RPM_ExportedToExcelControllerTest {
-	static RPM_ExportedToExcelController controller = new RPM_ExportedToExcelController();
     
-    @isTest static void testFilename() {
-    	controller.fileName = 'test';
-        System.assertEquals('test',controller.fileName);
+    @isTest static void testBlankSearchCriteria() {
+    	RuleFull__c newRule = new RuleFull__c();
+        Practice__c practice = new Practice__c();
+        practice.Name = 'PracticeTest';
+        insert practice;
+        RPM_ExportedToExcelController controller = new RPM_ExportedToExcelController();
     }
     
-    @isTest static void testSetFitlersTrue() {
+    @isTest static void testSetFitlers() {
+        RuleFull__c newRule = new RuleFull__c();
+        Practice__c practice = new Practice__c();
+        practice.Name = 'PracticeTest';
+        insert practice;
+        RPM_ExportedToExcelController controller = new RPM_ExportedToExcelController();
+        controller.selectedParent = '0';
         controller.filterParam = '1111111';
         controller.setFilters();
         System.assertEquals(true ,controller.payorDetail);
@@ -17,9 +25,6 @@ public class RPM_ExportedToExcelControllerTest {
         System.assertEquals(true ,controller.paymentDetail);
         System.assertEquals(true ,controller.feeDetail);
         System.assertEquals(true ,controller.pharmacyDetail);
-    }
-    
-    @isTest static void testSetFitlersFalse() {
         controller.filterParam = '0000000';
         controller.setFilters();
         System.assertEquals(false ,controller.payorDetail);
@@ -30,4 +35,5 @@ public class RPM_ExportedToExcelControllerTest {
         System.assertEquals(false ,controller.feeDetail);
         System.assertEquals(false ,controller.pharmacyDetail);
     }
+
 }

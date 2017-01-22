@@ -8,4 +8,5 @@
     <tab>standard-report</tab>
     <tab>standard-Dashboard</tab>
     <tab>Admin_Tools</tab>
+    <tab>Practice__c</tab>
 </CustomApplication>
